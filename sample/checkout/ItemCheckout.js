@@ -1,6 +1,5 @@
 var paymayaSdk = require("./../../lib/paymaya/PaymayaSDK");
 var Checkout = require("./../../lib/paymaya/api/Checkout");
-var Customization = require("./../../lib/paymaya/api/Customization");
 var Item = require("./../../lib/paymaya/model/checkout/Item");
 var ItemAmount = require("./../../lib/paymaya/model/checkout/ItemAmount");
 var ItemAmountDetails = require("./../../lib/paymaya/model/checkout/ItemAmountDetails");
@@ -8,8 +7,8 @@ var User = require("./User");
 
 (function() {
 	
-	// Initialize Paymaya SDK with Checkout API key and environment(SANDBOX or PRODUCTION)
-	paymayaSdk.initCheckout("pk-iaioBC2pbY6d3BVRSebsJxghSHeJDW4n6navI7tYdrN", paymayaSdk.ENVIRONMENT.SANDBOX);
+	// Initialize Paymaya SDK with Checkout API key, secret key and environment(SANDBOX or PRODUCTION)
+	paymayaSdk.initCheckout("pk-iaioBC2pbY6d3BVRSebsJxghSHeJDW4n6navI7tYdrN", "sk-uh4ZFfx9i0rZpKN6CxJ826nVgJ4saGGVAH9Hk7WrY6Q", paymayaSdk.ENVIRONMENT.SANDBOX);
 
 	// Contruct item amount details
 	var itemAmountDetails = _getItemAmountDetails();
@@ -33,67 +32,6 @@ var User = require("./User");
 	_executeInitiateCheckout(checkout, buyer, items, itemAmount);
 
 })();
-
-function _executeInitiateCheckout(checkout, buyer, items, itemAmount) {
-	var checkoutOptions = {
-		buyer: buyer,
-		items: items,
-		totalAmount: itemAmount,
-		requestReferenceNumber: "123456789"
-	}
-	var onInitiateCheckout = function(err, response) {
-		if(err) {
-			console.log("Error: " + err);
-			return;
-		}
-		console.log("checkoutId: " + response.checkoutId);
-		console.log("redirectUrl: " + response.redirectUrl);
-
-		_executeGetCheckout(checkout, response.checkoutId);
-	}
-	console.log("\nInitiating Checkout Api");
-	checkout.executeInitiateCheckout(checkoutOptions, onInitiateCheckout);
-}
-
-function _executeGetCheckout(checkout, checkoutId) {
-	var onRetrieveCheckout = function(err, response) {
-		if(err) {
-			console.log("Error: " + err);
-			//return;
-		}
-		if(response) {
-			console.log("response: " + response);
-		}
-
-		// Initialize Customization
-		var customization = new Customization();
-		_executeSetCustomization(customization);
-	}
-	console.log("\nRetrieving Checkout Api");
-	checkout.executeRetrieveCheckout(checkoutId, onRetrieveCheckout);
-}
-
-function _executeSetCustomization(customization) {
-	var customizationOptions = {
-	    "logoUrl": "https://cdn.paymaya.com/production/checkout_api/customization_example/yourlogo.svg",
-	    "iconUrl": "https://cdn.paymaya.com/production/checkout_api/customization_example/youricon.ico",
-	    "appleTouchIconUrl": "https://cdn.paymaya.com/production/checkout_api/customization_example/youricon_ios.ico",
-	    "customTitle": "Checkout Page Title",
-	    "colorScheme": "#368d5c"
-	}
-
-	var onSetCustomization = function(err, response) {
-		if(err) {
-			console.log("Error: " + err);
-			//return;
-		}
-		if(response) {
-			console.log("response: " + response);
-		}
-	}
-	console.log("\nSet Customization Api");
-	customization.executeSetCustomization(customizationOptions, onSetCustomization);
-}
 
 function _getItemAmountDetails() {
 	var itemAmountDetailsOptions = {
@@ -122,4 +60,42 @@ function _getItem(amount, totalAmount) {
 		totalAmount: totalAmount
 	}
 	return new Item(itemOptions);
+}
+
+function _executeInitiateCheckout(checkout, buyer, items, itemAmount) {
+	var checkoutOptions = {
+		buyer: buyer,
+		items: items,
+		totalAmount: itemAmount,
+		requestReferenceNumber: "123456789"
+	}
+	var onInitiateCheckout = function(err, response) {
+		if(err) {
+			console.log("Error: " + err);
+			return;
+		}
+		//console.log("checkoutId: " + response.checkoutId);
+		//console.log("redirectUrl: " + response.redirectUrl);
+		if(response) {
+			console.log(JSON.stringify(response));
+		}
+
+		_executeGetCheckout(checkout, response.checkoutId);
+	}
+	console.log("\nInitiating Checkout Api");
+	checkout.executeInitiateCheckout(checkoutOptions, onInitiateCheckout);
+}
+
+function _executeGetCheckout(checkout, checkoutId) {
+	var onRetrieveCheckout = function(err, response) {
+		if(err) {
+			console.log("Error: " + err);
+			//return;
+		}
+		if(response) {
+			console.log(JSON.stringify(response));
+		}
+	}
+	console.log("\nRetrieving Checkout Api");
+	checkout.executeRetrieveCheckout(checkoutId, onRetrieveCheckout);
 }
