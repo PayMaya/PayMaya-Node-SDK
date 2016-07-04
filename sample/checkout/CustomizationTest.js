@@ -12,18 +12,16 @@ var Customization = require("./../../lib/paymaya/api/Customization");
 })();
 
 function _executeSetCustomization(customization) {
-	var customizationOptions = {
-	    "logoUrl": "https://cdn.paymaya.com/production/checkout_api/customization_example/yourlogo.svg",
-	    "iconUrl": "https://cdn.paymaya.com/production/checkout_api/customization_example/youricon.ico",
-	    "appleTouchIconUrl": "https://cdn.paymaya.com/production/checkout_api/customization_example/youricon_ios.ico",
-	    "customTitle": "Checkout Page Title",
-	    "colorScheme": "#368d5c"
-	}
+	customization.logoUrl = "https://cdn.paymaya.com/production/checkout_api/customization_example/yourlogo.svg";
+	customization.iconUrl = "https://cdn.paymaya.com/production/checkout_api/customization_example/youricon.ico";
+	customization.appleTouchIconUrl = "https://cdn.paymaya.com/production/checkout_api/customization_example/youricon_ios.ico";
+	customization.customTitle = "Checkout Page Title";
+	customization.colorScheme = "#368d5c";
 
 	var onSetCustomization = function(err, response) {
 		if(err) {
 			console.log("Error: " + err);
-			//return;
+			return;
 		}
 		if(response) {
 			console.log(JSON.stringify(response));
@@ -31,15 +29,16 @@ function _executeSetCustomization(customization) {
 
 		_executeGetCustomization(customization);
 	}
+
 	console.log("\nSet Customization Api");
-	customization.executeSetCustomization(customizationOptions, onSetCustomization);
+	customization.execute(onSetCustomization);
 }
 
 function _executeGetCustomization(customization) {
 	var onGetCustomization = function(err, response) {
 		if(err) {
 			console.log("Error: " + err);
-			//return;
+			return;
 		}
 		if(response) {
 			console.log(JSON.stringify(response));
@@ -48,19 +47,19 @@ function _executeGetCustomization(customization) {
 		_executeRemoveCustomization(customization);
 	}
 	console.log("\nGet Customization Api");
-	customization.executeGetCustomization(onGetCustomization);
+	customization.get(onGetCustomization);
 }
 
 function _executeRemoveCustomization(customization) {
 	var onRemoveCustomization = function(err, response) {
 		if(err) {
 			console.log("Error: " + err);
-			//return;
+			return;
 		}
 		if(response) {
 			console.log(JSON.stringify(response));
 		}
 	}
 	console.log("\nRemove Customization Api");
-	customization.executeRemoveCustomization(onRemoveCustomization);
+	customization.remove(onRemoveCustomization);
 }
