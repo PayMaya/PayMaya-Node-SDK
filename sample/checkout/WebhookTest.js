@@ -12,15 +12,13 @@ var Webhook = require("./../../lib/paymaya/api/Webhook");
 })();
 
 function _executeRegisterWebhook(webhook) {
-	var webhookOptions = {
-	    "name": "CHECKOUT_SUCCESS",
-	    "callbackUrl": "http://shop.someserver.com/success"
-	}
+	webhook.name = "CHECKOUT_SUCCESS";
+	webhook.callbackUrl = "http://shop.someserver.com/success";
 
 	var onRegisterWebhook = function(err, response) {
 		if(err) {
 			console.log("Error: " + err);
-			//return;
+			return;
 		}
 		if(response) {
 			console.log(JSON.stringify(response));
@@ -29,14 +27,14 @@ function _executeRegisterWebhook(webhook) {
 		_executeRetrieveWebhooks(webhook);
 	}
 	console.log("\nRegister Webhook Api");
-	webhook.executeRegisterWebhook(webhookOptions, onRegisterWebhook);
+	webhook.register(onRegisterWebhook);
 }
 
 function _executeRetrieveWebhooks(webhook) {
 	var onRetrieveWebhook = function(err, response) {
 		if(err) {
 			console.log("Error: " + err);
-			//return;
+			return;
 		}
 		if(response) {
 			console.log(JSON.stringify(response));
@@ -45,18 +43,18 @@ function _executeRetrieveWebhooks(webhook) {
 		_executeUpdateWebhook(webhook, response[1].id);
 	}
 	console.log("\nRetrieve Webhook Api");
-	webhook.executeRetrieveWebhooks(onRetrieveWebhook);
+	webhook.get(onRetrieveWebhook);
 }
 
 function _executeUpdateWebhook(webhook, webhookId) {
-	var webhookOptions = {
-	    "name": "CHECKOUT_SUCCESS",
-	    "callbackUrl": "http://shop.someserver.com/success_modified"
-	}
+	webhook.webhookId = webhookId;
+	webhook.name = "CHECKOUT_SUCCESS";
+	webhook.callbackUrl = "http://shop.someserver.com/success_update";
+
 	var onUpdateWebhook = function(err, response) {
 		if(err) {
 			console.log("Error: " + err);
-			//return;
+			return;
 		}
 		if(response) {
 			console.log(JSON.stringify(response));
@@ -65,19 +63,20 @@ function _executeUpdateWebhook(webhook, webhookId) {
 		_executeRemoveWebhook(webhook, webhookId);
 	}
 	console.log("\nUpdate Webhook Api");
-	webhook.executeUpdateWebhook(webhookId, webhookOptions, onUpdateWebhook);
+	webhook.update(onUpdateWebhook);
 }
 
 function _executeRemoveWebhook(webhook, webhookId) {
+	webhook.webhookId = webhookId;
 	var onRemoveWebhook = function(err, response) {
 		if(err) {
 			console.log("Error: " + err);
-			//return;
+			return;
 		}
 		if(response) {
 			console.log(JSON.stringify(response));
 		}
 	}
 	console.log("\nRemove Webhook Api");
-	webhook.executeRemoveWebhook(webhookId, onRemoveWebhook);
+	webhook.remove(onRemoveWebhook);
 }
