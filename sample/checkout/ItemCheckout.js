@@ -87,7 +87,7 @@ function _executeGetCheckout(checkout, checkoutId) {
 	var onRetrieveCheckout = function(err, response) {
 		if(err) {
 			console.log("Error: " + err);
-			//return;
+			return;
 		}
 		if(response) {
 			console.log(JSON.stringify(response));
