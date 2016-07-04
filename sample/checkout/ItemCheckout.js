@@ -63,19 +63,15 @@ function _getItem(amount, totalAmount) {
 }
 
 function _executeInitiateCheckout(checkout, buyer, items, itemAmount) {
-	var checkoutOptions = {
-		buyer: buyer,
-		items: items,
-		totalAmount: itemAmount,
-		requestReferenceNumber: "123456789"
-	}
+	checkout.buyer = buyer;
+	checkout.items = items;
+	checkout.totalAmount = itemAmount;
+	checkout.requestReferenceNumber = "123456789";
 	var onInitiateCheckout = function(err, response) {
 		if(err) {
 			console.log("Error: " + err);
 			return;
 		}
-		//console.log("checkoutId: " + response.checkoutId);
-		//console.log("redirectUrl: " + response.redirectUrl);
 		if(response) {
 			console.log(JSON.stringify(response));
 		}
@@ -83,10 +79,11 @@ function _executeInitiateCheckout(checkout, buyer, items, itemAmount) {
 		_executeGetCheckout(checkout, response.checkoutId);
 	}
 	console.log("\nInitiating Checkout Api");
-	checkout.executeInitiateCheckout(checkoutOptions, onInitiateCheckout);
+	checkout.execute(onInitiateCheckout);
 }
 
 function _executeGetCheckout(checkout, checkoutId) {
+	checkout.checkoutId = checkoutId;
 	var onRetrieveCheckout = function(err, response) {
 		if(err) {
 			console.log("Error: " + err);
@@ -97,5 +94,5 @@ function _executeGetCheckout(checkout, checkoutId) {
 		}
 	}
 	console.log("\nRetrieving Checkout Api");
-	checkout.executeRetrieveCheckout(checkoutId, onRetrieveCheckout);
+	checkout.get(onRetrieveCheckout);
 }
