@@ -31,7 +31,7 @@ function _executeSetCustomization(customization) {
 	}
 
 	console.log("\nSet Customization Api");
-	customization.execute(onSetCustomization);
+	customization.set(onSetCustomization);
 }
 
 function _executeGetCustomization(customization) {
