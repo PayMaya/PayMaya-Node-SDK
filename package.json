@@ -1,5 +1,5 @@
 {
-  "name": "paymaya-nodejs-sdk",
+  "name": "paymaya-node-sdk",
   "version": "0.0.1",
   "description": "Node.js Client for Paymaya API",
   "main": "index.js",
