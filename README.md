@@ -36,20 +36,18 @@ Upon successful integration testing, you can then request for production credent
 
 #### _Checkout_
 1. Initiate SDK
-```
+```javascript
 var paymayaSdk = require("paymaya-node-sdk");
 
 paymayaSdk.initCheckout(<CHECKOUT_PUBLIC_FACING_API_KEY>, <CHECKOUT_SECRET_KEY>, paymayaSdk.ENVIRONMENT.SANDBOX);
 ```
-
 2. Create Checkout object
-```
+```javascript
 var checkout = new Checkout();
 ```
-
 3. Execute Checkout API
 * Initiate Checkout
-```
+```javascript
 /**
 * Construct buyer here
 * var buyer = new Buyer();
@@ -75,7 +73,7 @@ checkout.execute(callback);
 ```
 
 * Retrieve Checkout
-```
+```javascript
 checkout.id = CHECKOUT_ID;
 checkout.retrieve(callback);
 ```
@@ -84,20 +82,20 @@ checkout.retrieve(callback);
 
 #### _Customization_
 1. Initiate SDK
-```
+```javascript
 var paymayaSdk = require("paymaya-node-sdk");
 
 paymayaSdk.initCheckout(<CHECKOUT_PUBLIC_FACING_API_KEY>, <CHECKOUT_SECRET_KEY>, paymayaSdk.ENVIRONMENT.SANDBOX);
 ```
 
 2. Create Customization object
-```
+```javascript
 var customization = new Customization();
 ```
 
 3. Execute Customization API
 * Set Customization
-```
+```javascript
 customization.logoUrl = "";
 customization.iconUrl = "";
 customization.appleTouchIconUrl = "";
@@ -108,30 +106,30 @@ customization.set(callback);
 ```
 
 * Get Customization
-```
+```javascript
 customization.get(callback);
 ```
 
 * Remove Customization
-```
+```javascript
 customization.remove(callback);
 ```
 #### _Webhook_
 1. Initiate SDK
-```
+```javascript
 var paymayaSdk = require("paymaya-node-sdk");
 
 paymayaSdk.initCheckout(<CHECKOUT_PUBLIC_FACING_API_KEY>, <CHECKOUT_SECRET_KEY>, paymayaSdk.ENVIRONMENT.SANDBOX);
 ```
 
 2. Create Webhook object
-```
+```javascript
 var webhook = new Webhook();
 ```
 
 3. Execute Webhook API
 * Set Webhook
-```
+```javascript
 webhook.name = "CHECKOUT_SUCCESS"; // it can be CHECKOUT_SUCCESS or CHECKOUT_SUCCESS
 webhook.callbackUrl = "";
 
@@ -139,12 +137,12 @@ webhook.register(callback);
 ```
 
 * Get Webhook
-```
+```javascript
 webhook.get(callback);
 ```
 
 * Update Webhook
-```
+```javascript
 webhook.webhookId = WEBHOOK_ID;
 webhook.name = "CHECKOUT_SUCCESS"; // it can be CHECKOUT_SUCCESS or CHECKOUT_SUCCESS
 webhook.callbackUrl = "";
@@ -153,7 +151,7 @@ webhook.update(callback);
 ```
 
 * Remove Webhook
-```
+```javascript
 webhook.webhookId = WEBHOOK_ID;
 webhook.remove(callback);
 ```
