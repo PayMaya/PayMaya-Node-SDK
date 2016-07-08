@@ -94,5 +94,5 @@ function _executeGetCheckout(checkout, id) {
 		}
 	}
 	console.log("\nRetrieving Checkout Api");
-	checkout.get(onRetrieveCheckout);
+	checkout.retrieve(onRetrieveCheckout);
 }
