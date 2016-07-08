@@ -43,7 +43,7 @@ function _executeRetrieveWebhooks(webhook) {
 		_executeUpdateWebhook(webhook, response[1].id);
 	}
 	console.log("\nRetrieve Webhook Api");
-	webhook.get(onRetrieveWebhook);
+	webhook.retrieve(onRetrieveWebhook);
 }
 
 function _executeUpdateWebhook(webhook, webhookId) {
@@ -60,15 +60,15 @@ function _executeUpdateWebhook(webhook, webhookId) {
 			console.log(JSON.stringify(response));
 		}
 
-		_executeRemoveWebhook(webhook, webhookId);
+		_executeDeleteWebhook(webhook, webhookId);
 	}
 	console.log("\nUpdate Webhook Api");
 	webhook.update(onUpdateWebhook);
 }
 
-function _executeRemoveWebhook(webhook, webhookId) {
+function _executeDeleteWebhook(webhook, webhookId) {
 	webhook.webhookId = webhookId;
-	var onRemoveWebhook = function(err, response) {
+	var onDeleteWebhook = function(err, response) {
 		if(err) {
 			console.log("Error: " + err);
 			return;
@@ -77,6 +77,6 @@ function _executeRemoveWebhook(webhook, webhookId) {
 			console.log(JSON.stringify(response));
 		}
 	}
-	console.log("\nRemove Webhook Api");
-	webhook.remove(onRemoveWebhook);
+	console.log("\Delete Webhook Api");
+	webhook.delete(onRemoveWebhook);
 }
