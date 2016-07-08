@@ -82,8 +82,8 @@ function _executeInitiateCheckout(checkout, buyer, items, itemAmount) {
 	checkout.execute(onInitiateCheckout);
 }
 
-function _executeGetCheckout(checkout, checkoutId) {
-	checkout.checkoutId = checkoutId;
+function _executeGetCheckout(checkout, id) {
+	checkout.id = id;
 	var onRetrieveCheckout = function(err, response) {
 		if(err) {
 			console.log("Error: " + err);
