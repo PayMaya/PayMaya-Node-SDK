@@ -34,6 +34,17 @@ Upon successful integration testing, you can then request for production credent
 
 ## Usage
 
+Public functions in Checkout, Payments, Customization and Webhook instances are executed asynchronously so you have to pass callback with two parameters for error and actual response. This is an example of callback:
+```javascript
+var callback = function(err, response) {
+   if(err) {
+      console.log(err);
+      return;
+   }
+   console.log(JSON.stringify(response));
+}
+```
+
 #### _Checkout_
 
 ###### 1. Initiate SDK
