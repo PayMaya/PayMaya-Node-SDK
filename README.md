@@ -35,18 +35,22 @@ Upon successful integration testing, you can then request for production credent
 ## Usage
 
 #### _Checkout_
+
 ###### 1. Initiate SDK
 ```javascript
 var paymayaSdk = require("paymaya-node-sdk");
 
 paymayaSdk.initCheckout(<CHECKOUT_PUBLIC_FACING_API_KEY>, <CHECKOUT_SECRET_KEY>, paymayaSdk.ENVIRONMENT.SANDBOX);
 ```
+_If in Production, change environment to paymayaSdk.ENVIRONMENT.PRODUCTION_
+
 ###### 2. Create Checkout object
 ```javascript
 var checkout = new Checkout();
 ```
+
 ###### 3. Execute Checkout API
-* Initiate Checkout
+* Initiate Checkout - Checkout service entry point. It returns a checkoutId, and checkoutUrl. Use the checkoutUrl to redirect the buyer to the Checkout page.
 ```javascript
 /**
 * Construct buyer here
@@ -72,7 +76,7 @@ checkout.items = items;
 checkout.execute(callback);
 ```
 
-* Retrieve Checkout
+* Retrieve Checkout - Use this call to get information about a checkout identified by a checkoutId.
 ```javascript
 checkout.id = CHECKOUT_ID;
 checkout.retrieve(callback);
@@ -81,6 +85,7 @@ checkout.retrieve(callback);
 #### _Payments_
 
 #### _Customization_
+
 ###### 1. Initiate SDK
 ```javascript
 var paymayaSdk = require("paymaya-node-sdk");
@@ -94,7 +99,7 @@ var customization = new Customization();
 ```
 
 ###### 3. Execute Customization API
-* Set Customization
+* Set Customization - Used to set a merchant's checkout page customization.
 ```javascript
 customization.logoUrl = "";
 customization.iconUrl = "";
@@ -105,16 +110,17 @@ customization.colorScheme = "";
 customization.set(callback);
 ```
 
-* Get Customization
+* Get Customization - Used to get a merchant's set checkout page customization.
 ```javascript
 customization.get(callback);
 ```
 
-* Remove Customization
+* Remove Customization - Used to remove a merchant's set checkout page customization.
 ```javascript
 customization.remove(callback);
 ```
 #### _Webhook_
+
 ###### 1. Initiate SDK
 ```javascript
 var paymayaSdk = require("paymaya-node-sdk");
@@ -128,7 +134,7 @@ var webhook = new Webhook();
 ```
 
 ###### 3. Execute Webhook API
-* Set Webhook
+* Set Webhook - Used to register an event-based webhook.
 ```javascript
 webhook.name = "CHECKOUT_SUCCESS"; // it can be CHECKOUT_SUCCESS or CHECKOUT_SUCCESS
 webhook.callbackUrl = "";
@@ -136,12 +142,12 @@ webhook.callbackUrl = "";
 webhook.register(callback);
 ```
 
-* Get Webhook
+* Get Webhook - Used to retrieve the list of merchant registered webhooks.
 ```javascript
 webhook.get(callback);
 ```
 
-* Update Webhook
+* Update Webhook - Used to update an existing event-based webhook.
 ```javascript
 webhook.webhookId = WEBHOOK_ID;
 webhook.name = "CHECKOUT_SUCCESS"; // it can be CHECKOUT_SUCCESS or CHECKOUT_SUCCESS
@@ -150,7 +156,7 @@ webhook.callbackUrl = "";
 webhook.update(callback);
 ```
 
-* Remove Webhook
+* Remove Webhook - Used to delete an existing webhook. You cannot undo this action.
 ```javascript
 webhook.webhookId = WEBHOOK_ID;
 webhook.remove(callback);
