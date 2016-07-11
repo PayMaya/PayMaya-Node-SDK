@@ -34,18 +34,18 @@ Upon successful integration testing, you can then request for production credent
 
 ## Usage
 
-#### _Checkout_
-1. Initiate SDK
+_Checkout_
+Initiate SDK
 ```javascript
 var paymayaSdk = require("paymaya-node-sdk");
 
 paymayaSdk.initCheckout(<CHECKOUT_PUBLIC_FACING_API_KEY>, <CHECKOUT_SECRET_KEY>, paymayaSdk.ENVIRONMENT.SANDBOX);
 ```
-2. Create Checkout object
+Create Checkout object
 ```javascript
 var checkout = new Checkout();
 ```
-3. Execute Checkout API
+Execute Checkout API
 * Initiate Checkout
 ```javascript
 /**
@@ -78,22 +78,22 @@ checkout.id = CHECKOUT_ID;
 checkout.retrieve(callback);
 ```
 
-#### _Payments_
+_Payments_
 
-#### _Customization_
-1. Initiate SDK
+_Customization_
+Initiate SDK
 ```javascript
 var paymayaSdk = require("paymaya-node-sdk");
 
 paymayaSdk.initCheckout(<CHECKOUT_PUBLIC_FACING_API_KEY>, <CHECKOUT_SECRET_KEY>, paymayaSdk.ENVIRONMENT.SANDBOX);
 ```
 
-2. Create Customization object
+Create Customization object
 ```javascript
 var customization = new Customization();
 ```
 
-3. Execute Customization API
+Execute Customization API
 * Set Customization
 ```javascript
 customization.logoUrl = "";
@@ -114,20 +114,20 @@ customization.get(callback);
 ```javascript
 customization.remove(callback);
 ```
-#### _Webhook_
-1. Initiate SDK
+_Webhook_
+Initiate SDK
 ```javascript
 var paymayaSdk = require("paymaya-node-sdk");
 
 paymayaSdk.initCheckout(<CHECKOUT_PUBLIC_FACING_API_KEY>, <CHECKOUT_SECRET_KEY>, paymayaSdk.ENVIRONMENT.SANDBOX);
 ```
 
-2. Create Webhook object
+Create Webhook object
 ```javascript
 var webhook = new Webhook();
 ```
 
-3. Execute Webhook API
+Execute Webhook API
 * Set Webhook
 ```javascript
 webhook.name = "CHECKOUT_SUCCESS"; // it can be CHECKOUT_SUCCESS or CHECKOUT_SUCCESS
