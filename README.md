@@ -81,19 +81,19 @@ checkout.retrieve(callback);
 #### _Payments_
 
 #### _Customization_
-Initiate SDK
+###### 1. Initiate SDK
 ```javascript
 var paymayaSdk = require("paymaya-node-sdk");
 
 paymayaSdk.initCheckout(<CHECKOUT_PUBLIC_FACING_API_KEY>, <CHECKOUT_SECRET_KEY>, paymayaSdk.ENVIRONMENT.SANDBOX);
 ```
 
-Create Customization object
+###### 2. Create Customization object
 ```javascript
 var customization = new Customization();
 ```
 
-Execute Customization API
+###### 3. Execute Customization API
 * Set Customization
 ```javascript
 customization.logoUrl = "";
@@ -115,19 +115,19 @@ customization.get(callback);
 customization.remove(callback);
 ```
 #### _Webhook_
-Initiate SDK
+###### 1. Initiate SDK
 ```javascript
 var paymayaSdk = require("paymaya-node-sdk");
 
 paymayaSdk.initCheckout(<CHECKOUT_PUBLIC_FACING_API_KEY>, <CHECKOUT_SECRET_KEY>, paymayaSdk.ENVIRONMENT.SANDBOX);
 ```
 
-Create Webhook object
+###### 2. Create Webhook object
 ```javascript
 var webhook = new Webhook();
 ```
 
-Execute Webhook API
+###### 3. Execute Webhook API
 * Set Webhook
 ```javascript
 webhook.name = "CHECKOUT_SUCCESS"; // it can be CHECKOUT_SUCCESS or CHECKOUT_SUCCESS
