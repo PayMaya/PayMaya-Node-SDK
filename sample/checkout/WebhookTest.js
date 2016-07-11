@@ -17,8 +17,8 @@ function _executeRegisterWebhook(webhook) {
 
 	var onRegisterWebhook = function(err, response) {
 		if(err) {
-			console.log("Error: " + err);
-			return;
+			console.error("Error: " + err);
+			//return;
 		}
 		if(response) {
 			console.log(JSON.stringify(response));
@@ -33,14 +33,13 @@ function _executeRegisterWebhook(webhook) {
 function _executeRetrieveWebhooks(webhook) {
 	var onRetrieveWebhook = function(err, response) {
 		if(err) {
-			console.log("Error: " + err);
+			console.error("Error: " + err);
 			return;
 		}
 		if(response) {
 			console.log(JSON.stringify(response));
 		}
-
-		_executeUpdateWebhook(webhook, response[1].id);
+		_executeUpdateWebhook(webhook, response[0].id);
 	}
 	console.log("\nRetrieve Webhook Api");
 	webhook.retrieve(onRetrieveWebhook);
@@ -53,8 +52,8 @@ function _executeUpdateWebhook(webhook, webhookId) {
 
 	var onUpdateWebhook = function(err, response) {
 		if(err) {
-			console.log("Error: " + err);
-			return;
+			console.error("Error: " + err);
+			//return;
 		}
 		if(response) {
 			console.log(JSON.stringify(response));
@@ -70,13 +69,13 @@ function _executeDeleteWebhook(webhook, webhookId) {
 	webhook.webhookId = webhookId;
 	var onDeleteWebhook = function(err, response) {
 		if(err) {
-			console.log("Error: " + err);
+			console.error("Error: " + err);
 			return;
 		}
 		if(response) {
 			console.log(JSON.stringify(response));
 		}
 	}
-	console.log("\Delete Webhook Api");
-	webhook.delete(onRemoveWebhook);
+	console.log("\nDelete Webhook Api");
+	webhook.delete(onDeleteWebhook);
 }

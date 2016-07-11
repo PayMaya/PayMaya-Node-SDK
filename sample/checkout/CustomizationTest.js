@@ -20,7 +20,7 @@ function _executeSetCustomization(customization) {
 
 	var onSetCustomization = function(err, response) {
 		if(err) {
-			console.log("Error: " + err);
+			console.error("Error: " + err);
 			return;
 		}
 		if(response) {
@@ -37,7 +37,7 @@ function _executeSetCustomization(customization) {
 function _executeGetCustomization(customization) {
 	var onGetCustomization = function(err, response) {
 		if(err) {
-			console.log("Error: " + err);
+			console.error("Error: " + err);
 			return;
 		}
 		if(response) {
@@ -53,7 +53,7 @@ function _executeGetCustomization(customization) {
 function _executeRemoveCustomization(customization) {
 	var onRemoveCustomization = function(err, response) {
 		if(err) {
-			console.log("Error: " + err);
+			console.error("Error: " + err);
 			return;
 		}
 		if(response) {

@@ -69,7 +69,7 @@ function _executeInitiateCheckout(checkout, buyer, items, itemAmount) {
 	checkout.requestReferenceNumber = "123456789";
 	var onInitiateCheckout = function(err, response) {
 		if(err) {
-			console.log("Error: " + err);
+			console.error("Error: " + err);
 			return;
 		}
 		if(response) {
@@ -86,7 +86,7 @@ function _executeGetCheckout(checkout, id) {
 	checkout.id = id;
 	var onRetrieveCheckout = function(err, response) {
 		if(err) {
-			console.log("Error: " + err);
+			console.error("Error: " + err);
 			return;
 		}
 		if(response) {
