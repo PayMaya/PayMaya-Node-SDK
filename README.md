@@ -35,17 +35,17 @@ Upon successful integration testing, you can then request for production credent
 ## Usage
 
 #### _Checkout_
-Initiate SDK
+###### 1. Initiate SDK
 ```javascript
 var paymayaSdk = require("paymaya-node-sdk");
 
 paymayaSdk.initCheckout(<CHECKOUT_PUBLIC_FACING_API_KEY>, <CHECKOUT_SECRET_KEY>, paymayaSdk.ENVIRONMENT.SANDBOX);
 ```
-Create Checkout object
+###### 2. Create Checkout object
 ```javascript
 var checkout = new Checkout();
 ```
-Execute Checkout API
+###### 3. Execute Checkout API
 * Initiate Checkout
 ```javascript
 /**
