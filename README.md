@@ -34,7 +34,7 @@ Upon successful integration testing, you can then request for production credent
 
 ## Usage
 
-_Checkout_
+#### _Checkout_
 Initiate SDK
 ```javascript
 var paymayaSdk = require("paymaya-node-sdk");
@@ -78,9 +78,9 @@ checkout.id = CHECKOUT_ID;
 checkout.retrieve(callback);
 ```
 
-_Payments_
+#### _Payments_
 
-_Customization_
+#### _Customization_
 Initiate SDK
 ```javascript
 var paymayaSdk = require("paymaya-node-sdk");
@@ -114,7 +114,7 @@ customization.get(callback);
 ```javascript
 customization.remove(callback);
 ```
-_Webhook_
+#### _Webhook_
 Initiate SDK
 ```javascript
 var paymayaSdk = require("paymaya-node-sdk");
