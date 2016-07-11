@@ -4,7 +4,7 @@
   "description": "Node.js Client for Paymaya API",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "find test -name '*.js' | xargs mocha -R spec"
   },
   "keywords": [
     "paymaya",
@@ -15,5 +15,9 @@
   "license": "ISC",
   "dependencies": {
     "requestretry": "1.4.0"
+  },
+  "devDependencies": {
+    "chai": "*",
+    "mocha": "*"
   }
 }
