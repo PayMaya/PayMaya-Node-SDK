@@ -58,7 +58,7 @@ var callback = function(err, response) {
 ```javascript
 var paymayaSdk = require("paymaya-node-sdk");
 
-paymayaSdk.initCheckout(<CHECKOUT_PUBLIC_FACING_API_KEY>, <CHECKOUT_SECRET_KEY>, paymayaSdk.ENVIRONMENT.SANDBOX);
+paymayaSdk.initCheckout(<CHECKOUT_PUBLIC_FACING_API_KEY>, <CHECKOUT_SECRET_API_KEY>, paymayaSdk.ENVIRONMENT.SANDBOX);
 ```
 _If in Production, change environment to paymayaSdk.ENVIRONMENT.PRODUCTION_
 
@@ -107,7 +107,7 @@ checkout.retrieve(callback);
 ```javascript
 var paymayaSdk = require("paymaya-node-sdk");
 
-paymayaSdk.initCheckout(<CHECKOUT_PUBLIC_FACING_API_KEY>, <CHECKOUT_SECRET_KEY>, paymayaSdk.ENVIRONMENT.SANDBOX);
+paymayaSdk.initCheckout(<CHECKOUT_PUBLIC_FACING_API_KEY>, <CHECKOUT_SECRET_API_KEY>, paymayaSdk.ENVIRONMENT.SANDBOX);
 ```
 
 ##### 2. Create Customization object
@@ -118,11 +118,11 @@ var customization = new Customization();
 ##### 3. Execute Customization API
 * Set Customization - Used to set a merchant's checkout page customization.
 ```javascript
-customization.logoUrl = "";
-customization.iconUrl = "";
-customization.appleTouchIconUrl = "";
-customization.customTitle = "";
-customization.colorScheme = "";
+customization.logoUrl = "https://cdn.paymaya.com/production/checkout_api/customization_example/yourlogo.svg";
+customization.iconUrl = "https://cdn.paymaya.com/production/checkout_api/customization_example/youricon.ico";
+customization.appleTouchIconUrl = "https://cdn.paymaya.com/production/checkout_api/customization_example/youricon_ios.ico";
+customization.customTitle = "Checkout Page Title";
+customization.colorScheme = "#368d5c";
 
 customization.set(callback);
 ```
@@ -142,7 +142,7 @@ customization.remove(callback);
 ```javascript
 var paymayaSdk = require("paymaya-node-sdk");
 
-paymayaSdk.initCheckout(<CHECKOUT_PUBLIC_FACING_API_KEY>, <CHECKOUT_SECRET_KEY>, paymayaSdk.ENVIRONMENT.SANDBOX);
+paymayaSdk.initCheckout(<CHECKOUT_PUBLIC_FACING_API_KEY>, <CHECKOUT_SECRET_API_KEY>, paymayaSdk.ENVIRONMENT.SANDBOX);
 ```
 
 ##### 2. Create Webhook object
@@ -154,27 +154,27 @@ var webhook = new Webhook();
 * Set Webhook - Used to register an event-based webhook.
 ```javascript
 webhook.name = "CHECKOUT_SUCCESS"; // it can be CHECKOUT_SUCCESS or CHECKOUT_FAILURE
-webhook.callbackUrl = "";
+webhook.callbackUrl = "http://shop.someserver.com/success";
 
 webhook.register(callback);
 ```
 
 * Get Webhook - Used to retrieve the list of merchant registered webhooks.
 ```javascript
-webhook.get(callback);
+webhook.retrieve(callback);
 ```
 
 * Update Webhook - Used to update an existing event-based webhook.
 ```javascript
-webhook.name = "CHECKOUT_SUCCESS"; // it can be CHECKOUT_SUCCESS or CHECKOUT_SUCCESS
-webhook.callbackUrl = "";
+webhook.name = "CHECKOUT_SUCCESS"; // it can be CHECKOUT_SUCCESS or CHECKOUT_FAILURE
+webhook.callbackUrl = "http://shop.someserver.com/success_update";
 
 webhook.update(callback);
 ```
 
 * Remove Webhook - Used to delete an existing webhook. You cannot undo this action.
 ```javascript
-webhook.remove(callback);
+webhook.delete(callback);
 ```
 
 ## Summary
