@@ -15,7 +15,6 @@ describe('Checkout', function() {
 	var checkout;
 	var buyer;
 	var items = [];
-	var checkoutId;
 
 	var addressOptions = {
 	  	line1 : "9F Robinsons Cybergate 3",
@@ -123,14 +122,12 @@ describe('Checkout', function() {
   			should.exist(response);
   			response.should.have.property('checkoutId');
   			response.should.have.property('redirectUrl');
-  			checkoutId = response.checkoutId;
   			done();
 		}
 		checkout.execute(callback);
 	});
 
 	it('should execute retrieve checkout successfully', function(done) {
-		checkout.id = checkoutId;
 		var callback = function(err, response) {
 			should.not.exist(err);
   			should.exist(response);

@@ -76,14 +76,13 @@ function _executeInitiateCheckout(checkout, buyer, items, itemAmount) {
 			console.log(JSON.stringify(response));
 		}
 
-		_executeGetCheckout(checkout, response.checkoutId);
+		_executeGetCheckout(checkout);
 	}
 	console.log("\nInitiating Checkout Api");
 	checkout.execute(onInitiateCheckout);
 }
 
-function _executeGetCheckout(checkout, id) {
-	checkout.id = id;
+function _executeGetCheckout(checkout) {
 	var onRetrieveCheckout = function(err, response) {
 		if(err) {
 			console.error("Error: " + err);
