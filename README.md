@@ -149,7 +149,7 @@ var webhook = new Webhook();
 ###### 3. Execute Webhook API
 * Set Webhook - Used to register an event-based webhook.
 ```javascript
-webhook.name = "CHECKOUT_SUCCESS"; // it can be CHECKOUT_SUCCESS or CHECKOUT_SUCCESS
+webhook.name = "CHECKOUT_SUCCESS"; // it can be CHECKOUT_SUCCESS or CHECKOUT_FAILURE
 webhook.callbackUrl = "";
 
 webhook.register(callback);
