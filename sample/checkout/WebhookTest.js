@@ -39,14 +39,13 @@ function _executeRetrieveWebhooks(webhook) {
 		if(response) {
 			console.log(JSON.stringify(response));
 		}
-		_executeUpdateWebhook(webhook, response[0].id);
+		_executeUpdateWebhook(webhook);
 	}
 	console.log("\nRetrieve Webhook Api");
 	webhook.retrieve(onRetrieveWebhook);
 }
 
-function _executeUpdateWebhook(webhook, webhookId) {
-	webhook.webhookId = webhookId;
+function _executeUpdateWebhook(webhook) {
 	webhook.name = "CHECKOUT_SUCCESS";
 	webhook.callbackUrl = "http://shop.someserver.com/success_update";
 
@@ -59,14 +58,13 @@ function _executeUpdateWebhook(webhook, webhookId) {
 			console.log(JSON.stringify(response));
 		}
 
-		_executeDeleteWebhook(webhook, webhookId);
+		_executeDeleteWebhook(webhook);
 	}
 	console.log("\nUpdate Webhook Api");
 	webhook.update(onUpdateWebhook);
 }
 
-function _executeDeleteWebhook(webhook, webhookId) {
-	webhook.webhookId = webhookId;
+function _executeDeleteWebhook(webhook) {
 	var onDeleteWebhook = function(err, response) {
 		if(err) {
 			console.error("Error: " + err);

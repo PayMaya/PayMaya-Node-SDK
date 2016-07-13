@@ -7,13 +7,11 @@ var Webhook = require("./../../../lib/paymaya/api/Webhook");
 describe('Webhook', function() {
 
 	var webhook;
-	var webhookId;
 	
 	var webhookOptions = {
 		name: "CHECKOUT_SUCCESS",
 		callbackUrl: "http://shop.someserver.com/success",
-		callbackUrlUpdate: "http://shop.someserver.com/success_update",
-		webhookId: "123",
+		callbackUrlUpdate: "http://shop.someserver.com/success_update"
 	};
 
 	before(function(done) {
@@ -22,7 +20,6 @@ describe('Webhook', function() {
 		webhook = new Webhook();
 		webhook.name = webhookOptions.name;
 		webhook.callbackUrl = webhookOptions.callbackUrl;
-		webhook.webhookId = webhookOptions.webhookId;
 		done();
 	});
 	
@@ -36,8 +33,8 @@ describe('Webhook', function() {
 		done();
 	});
 
-	it('should have webhookId property', function(done) {
-		webhook.should.have.property('webhookId');
+	it('should have id property', function(done) {
+		webhook.should.have.property('id');
 		done();
 	});
 
@@ -48,11 +45,6 @@ describe('Webhook', function() {
 
 	it('should return correct callbackUrl value', function(done) {
 		webhook.callbackUrl.should.equal(webhookOptions.callbackUrl);
-		done();
-	});
-
-	it('should return correct webhookId value', function(done) {
-		webhook.webhookId.should.equal(webhookOptions.webhookId);
 		done();
 	});
 
@@ -76,7 +68,6 @@ describe('Webhook', function() {
 	});
 
 	it('should execute update webhook successfully', function(done) {
-		webhook.webhookId = webhookId;
 		webhook.name = webhookOptions.name;
 		webhook.callbackUrl = webhookOptions.callbackUrlUpdate;
 		var callback = function(err, response) {
@@ -88,7 +79,6 @@ describe('Webhook', function() {
 	});
 
 	it('should execute delete webhook successfully', function(done) {
-		webhook.webhookId = webhookId;
 		var callback = function(err, response) {
 			should.not.exist(err);
   			should.exist(response);
