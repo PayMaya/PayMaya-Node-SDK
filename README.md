@@ -96,7 +96,6 @@ checkout.execute(callback);
 
 * Retrieve Checkout - Use this call to get information about a checkout identified by a checkoutId.
 ```javascript
-checkout.id = CHECKOUT_ID;
 checkout.retrieve(callback);
 ```
 
@@ -167,7 +166,6 @@ webhook.get(callback);
 
 * Update Webhook - Used to update an existing event-based webhook.
 ```javascript
-webhook.webhookId = WEBHOOK_ID;
 webhook.name = "CHECKOUT_SUCCESS"; // it can be CHECKOUT_SUCCESS or CHECKOUT_SUCCESS
 webhook.callbackUrl = "";
 
@@ -176,7 +174,6 @@ webhook.update(callback);
 
 * Remove Webhook - Used to delete an existing webhook. You cannot undo this action.
 ```javascript
-webhook.webhookId = WEBHOOK_ID;
 webhook.remove(callback);
 ```
 
