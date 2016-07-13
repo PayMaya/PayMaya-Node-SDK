@@ -72,22 +72,63 @@ var checkout = new Checkout();
 ```javascript
 /**
 * Construct buyer here
-* var buyer = new Buyer();
-*
-* Contruct item here
-* var item = new Item();
-*
-* Contruct total amount here
-* var totalAmount = new TotalAmount();
-* 
 */
+var addressOptions = {
+	  	line1 : "9F Robinsons Cybergate 3",
+	  	line2 : "Pioneer Street",
+	  	city : "Mandaluyong City",
+	  	state : "Metro Manila",
+	  	zipCode : "12345",
+	  	countryCode : "PH"
+};
+
+var contactOptions = {
+ 		phone : "+63(2)1234567890",
+ 		email : "paymayabuyer1@gmail.com"
+};
+
+var buyerOptions = {
+ 	firstName : "John",
+ 	middleName : "Michaels",
+ 	lastName : "Doe",
+ 	contact : new Contact(contactOptions),
+ 	shippingAddress : new Address(addressOptions),
+ 	billingAddress : new Address(addressOptions)
+};
+	
+var buyer = new Buyer(buyerOptions);
+
+/**
+* Contruct item here
+*/
+var itemAmountDetailsOptions = {
+		shippingFee: "14.00",
+		tax: "5.00",
+		subTotal: "50.00" 
+};
+
+var itemAmountOptions = {
+		currency: "PHP",
+		value: "69.00",
+		details: new ItemAmountDetails(itemAmountDetailsOptions)
+};
+
+var itemOptions = {
+		name: "Leather Belt",
+		code: "pm_belt",
+		description: "Medium-sv",
+		amount: new ItemAmount(itemAmountOptions),
+		totalAmount: new ItemAmount(itemAmountOptions)
+};
+
+var	item = new Item(itemOptions);
 
 // Add all items here
 var items = [];
 items.push(item);
 
 checkout.buyer = buyer;
-checkout.totalAmount = totalAmount;
+checkout.totalAmount = itemOptions.totalAmount;
 checkout.requestReferenceNumber = YOUR_REQUEST_REFERENCE_NUMBER;
 checkout.items = items;
 
