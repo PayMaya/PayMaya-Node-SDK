@@ -9,6 +9,11 @@ The PayMaya Node SDK allows your Node.JS app to accept payments from your custom
 * [requestretry](https://github.com/FGRibreau/node-request-retry)
 
 
+#### Tests:
+* [chai](https://github.com/chaijs/chai)
+* [mocha](https://github.com/mochajs/mocha)
+
+
 ## Installation
 
 ```sh
@@ -49,7 +54,7 @@ var callback = function(err, response) {
 
 #### _Checkout_
 
-###### 1. Initiate SDK
+##### 1. Initiate SDK
 ```javascript
 var paymayaSdk = require("paymaya-node-sdk");
 
@@ -57,12 +62,12 @@ paymayaSdk.initCheckout(<CHECKOUT_PUBLIC_FACING_API_KEY>, <CHECKOUT_SECRET_KEY>,
 ```
 _If in Production, change environment to paymayaSdk.ENVIRONMENT.PRODUCTION_
 
-###### 2. Create Checkout object
+##### 2. Create Checkout object
 ```javascript
 var checkout = new Checkout();
 ```
 
-###### 3. Execute Checkout API
+##### 3. Execute Checkout API
 * Initiate Checkout - Checkout service entry point. It returns a checkoutId, and checkoutUrl. Use the checkoutUrl to redirect the buyer to the Checkout page.
 ```javascript
 /**
@@ -99,19 +104,19 @@ checkout.retrieve(callback);
 
 #### _Customization_
 
-###### 1. Initiate SDK
+##### 1. Initiate SDK
 ```javascript
 var paymayaSdk = require("paymaya-node-sdk");
 
 paymayaSdk.initCheckout(<CHECKOUT_PUBLIC_FACING_API_KEY>, <CHECKOUT_SECRET_KEY>, paymayaSdk.ENVIRONMENT.SANDBOX);
 ```
 
-###### 2. Create Customization object
+##### 2. Create Customization object
 ```javascript
 var customization = new Customization();
 ```
 
-###### 3. Execute Customization API
+##### 3. Execute Customization API
 * Set Customization - Used to set a merchant's checkout page customization.
 ```javascript
 customization.logoUrl = "";
@@ -134,19 +139,19 @@ customization.remove(callback);
 ```
 #### _Webhook_
 
-###### 1. Initiate SDK
+##### 1. Initiate SDK
 ```javascript
 var paymayaSdk = require("paymaya-node-sdk");
 
 paymayaSdk.initCheckout(<CHECKOUT_PUBLIC_FACING_API_KEY>, <CHECKOUT_SECRET_KEY>, paymayaSdk.ENVIRONMENT.SANDBOX);
 ```
 
-###### 2. Create Webhook object
+##### 2. Create Webhook object
 ```javascript
 var webhook = new Webhook();
 ```
 
-###### 3. Execute Webhook API
+##### 3. Execute Webhook API
 * Set Webhook - Used to register an event-based webhook.
 ```javascript
 webhook.name = "CHECKOUT_SUCCESS"; // it can be CHECKOUT_SUCCESS or CHECKOUT_FAILURE
