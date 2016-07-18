@@ -98,9 +98,6 @@ var buyerOptions = {
 	
 var buyer = new Buyer(buyerOptions);
 
-/**
-* Contruct item here
-*/
 var itemAmountDetailsOptions = {
 		shippingFee: "14.00",
 		tax: "5.00",
@@ -121,6 +118,9 @@ var itemOptions = {
 		totalAmount: new ItemAmount(itemAmountOptions)
 };
 
+/**
+* Contruct item here
+*/
 var	item = new Item(itemOptions);
 
 // Add all items here
@@ -140,8 +140,6 @@ checkout.execute(callback);
 checkout.retrieve(callback);
 ```
 
-#### _Payments_
-
 #### _Customization_
 
 ##### 1. Initiate SDK
@@ -150,6 +148,7 @@ var paymayaSdk = require("paymaya-node-sdk");
 
 paymayaSdk.initCheckout(<CHECKOUT_PUBLIC_FACING_API_KEY>, <CHECKOUT_SECRET_API_KEY>, paymayaSdk.ENVIRONMENT.SANDBOX);
 ```
+_If in Production, change environment to paymayaSdk.ENVIRONMENT.PRODUCTION_
 
 ##### 2. Create Customization object
 ```javascript
@@ -185,6 +184,7 @@ var paymayaSdk = require("paymaya-node-sdk");
 
 paymayaSdk.initCheckout(<CHECKOUT_PUBLIC_FACING_API_KEY>, <CHECKOUT_SECRET_API_KEY>, paymayaSdk.ENVIRONMENT.SANDBOX);
 ```
+_If in Production, change environment to paymayaSdk.ENVIRONMENT.PRODUCTION_
 
 ##### 2. Create Webhook object
 ```javascript
