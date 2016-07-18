@@ -11,22 +11,18 @@ function User() {
   this._lastName = "Doe";
 
   // Contact
-  var contactOptions = {
-  	phone : "+63(2)1234567890",
-  	email : "paymayabuyer1@gmail.com"
-  };
-  this._contact = new Contact(contactOptions);
+  this._contact = new Contact();
+  this._contact.phone = "+63(2)1234567890";
+  this._contact.email = "paymayabuyer1@gmail.com";
 
   // Address
-  var addressOptions = {
-  	line1 : "9F Robinsons Cybergate 3",
-  	line2 : "Pioneer Street",
-  	city : "Mandaluyong City",
-  	state : "Metro Manila",
-  	zipCode : "12345",
-  	countryCode : "PH"
-  };
-  var address = new Address(addressOptions);
+  var address = new Address();
+  address.line1 = "9F Robinsons Cybergate 3";
+  address.line2 = "Pioneer Street";
+  address.city = "Mandaluyong City";
+  address.state = "Metro Manila";
+  address.zipCode = "12345";
+  address.countryCode = "PH";
   this._shippingAddress = address;
   this._billingAddress = address;
 }
@@ -34,15 +30,13 @@ function User() {
 User.prototype = {
 
 	getBuyer: function() {
-		var buyerOptions = {
-			firstName : this._firstName,
-			middleName : this._middleName,
-			lastName : this._lastName,
-			contact : this._contact,
-			shippingAddress : this._shippingAddress,
-			billingAddress : this._billingAddress
-		};
-		var buyer = new Buyer(buyerOptions);
+		var buyer = new Buyer();
+    buyer.firstName = this._firstName;
+    buyer.middleName = this._middleName;
+    buyer.lastName = this._lastName;
+    buyer.contact = this._contact;
+    buyer.shippingAddress = this._shippingAddress;
+    buyer.billingAddress = this._billingAddress;
 		return buyer;
 	}
 };

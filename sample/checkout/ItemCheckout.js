@@ -34,32 +34,29 @@ var User = require("./User");
 })();
 
 function _getItemAmountDetails() {
-	var itemAmountDetailsOptions = {
-		shippingFee: "14.00",
-		tax: "5.00",
-		subTotal: "50.00" 
-	}
-	return new ItemAmountDetails(itemAmountDetailsOptions);
+	var itemAmountDetails = new ItemAmountDetails();
+	itemAmountDetails.shippingFee = "14.00";
+	itemAmountDetails.tax = "5.00";
+	itemAmountDetails.subTotal = "50.00";
+	return itemAmountDetails;
 }
 
 function _getItemAmount(itemAmountDetails) {
-	var itemAmountOptions = {
-		currency: "PHP",
-		value: "69.00",
-		details: itemAmountDetails
-	}
-	return new ItemAmount(itemAmountOptions);
+	var itemAmount = new ItemAmount();
+	itemAmount.currency = "PHP";
+	itemAmount.value = "69.00";
+	itemAmount.details = itemAmountDetails;
+	return itemAmount;
 }
 
 function _getItem(amount, totalAmount) {
-	var itemOptions = {
-		name: "Leather Belt",
-		code: "pm_belt",
-		description: "Medium-sv",
-		amount: amount,
-		totalAmount: totalAmount
-	}
-	return new Item(itemOptions);
+	var item = new Item();
+	item.name = "Leather Belt";
+	item.code = "pm_belt";
+	item.description = "Medium-sv";
+	item.amount = amount;
+	item.totalAmount = totalAmount;
+	return item;
 }
 
 function _executeInitiateCheckout(checkout, buyer, items, itemAmount) {
