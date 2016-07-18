@@ -4,7 +4,7 @@
   "description": "Node.js Client for Paymaya API",
   "main": "index.js",
   "scripts": {
-    "test": "find test -name '*.js' | xargs mocha -R spec"
+    "test": "find test -name '*.js' | xargs mocha -R spec --timeout 10000"
   },
   "keywords": [
     "paymaya",
