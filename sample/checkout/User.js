@@ -40,7 +40,7 @@ User.prototype = {
 			lastName : this._lastName,
 			contact : this._contact,
 			shippingAddress : this._shippingAddress,
-			billingAddress : this._billingAddress,
+			billingAddress : this._billingAddress
 		};
 		var buyer = new Buyer(buyerOptions);
 		return buyer;
