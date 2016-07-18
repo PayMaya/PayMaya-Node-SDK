@@ -25,14 +25,33 @@ describe('Buyer', function() {
 	var buyerOptions = {
 		firstName : "John",
 		middleName : "Michaels",
-		lastName : "Doe",
-		contact : new Contact(contactOptions),
-		shippingAddress : new Address(addressOptions),
-		billingAddress : new Address(addressOptions)
+		lastName : "Doe"
 	};
 
 	before(function(done) {
-		buyer = new Buyer(buyerOptions);
+		var contact = new Contact();
+		contact.phone = contactOptions.phone;
+  		contact.email = contactOptions.email;
+  		buyerOptions.contact = contact;
+
+		var address = new Address();
+		address.line1 = addressOptions.line1;
+	  	address.line2 = addressOptions.line2;
+	  	address.city = addressOptions.city;
+	  	address.state = addressOptions.state;
+	  	address.zipCode = addressOptions.zipCode;
+	  	address.countryCode = addressOptions.countryCode;
+	  	buyerOptions.shippingAddress = address;
+	  	buyerOptions.billingAddress = address;
+
+		buyer = new Buyer();
+		buyer.firstName = buyerOptions.firstName;
+		buyer.middleName = buyerOptions.middleName;
+		buyer.lastName = buyerOptions.lastName;
+		buyer.contact = buyerOptions.contact;
+		buyer.shippingAddress = buyerOptions.shippingAddress;
+		buyer.billingAddress = buyerOptions.billingAddress;
+
 		done();
 	});
 	

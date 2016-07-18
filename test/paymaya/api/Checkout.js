@@ -33,10 +33,7 @@ describe('Checkout', function() {
 	var buyerOptions = {
 		firstName : "John",
 		middleName : "Michaels",
-		lastName : "Doe",
-		contact : new Contact(contactOptions),
-		shippingAddress : new Address(addressOptions),
-		billingAddress : new Address(addressOptions)
+		lastName : "Doe"
 	};
 
 	var itemAmountDetailsOptions = {
@@ -47,16 +44,13 @@ describe('Checkout', function() {
 
 	var itemAmountOptions = {
 		currency: "PHP",
-		value: "69.00",
-		details: new ItemAmountDetails(itemAmountDetailsOptions)
+		value: "69.00"
 	};
 
 	var itemOptions = {
 		name: "Leather Belt",
 		code: "pm_belt",
-		description: "Medium-sv",
-		amount: new ItemAmount(itemAmountOptions),
-		totalAmount: new ItemAmount(itemAmountOptions)
+		description: "Medium-sv"
 	};
 
 	var requestReferenceNumber = "123456789";
@@ -64,8 +58,48 @@ describe('Checkout', function() {
 	before(function(done) {
 		paymayaSdk.initCheckout("pk-iaioBC2pbY6d3BVRSebsJxghSHeJDW4n6navI7tYdrN", "sk-uh4ZFfx9i0rZpKN6CxJ826nVgJ4saGGVAH9Hk7WrY6Q", paymayaSdk.ENVIRONMENT.SANDBOX);
 
-		buyer = new Buyer(buyerOptions);
-		item = new Item(itemOptions);
+		var contact = new Contact();
+		contact.phone = contactOptions.phone;
+  		contact.email = contactOptions.email;
+  		buyerOptions.contact = contact;
+
+		var address = new Address();
+		address.line1 = addressOptions.line1;
+	  	address.line2 = addressOptions.line2;
+	  	address.city = addressOptions.city;
+	  	address.state = addressOptions.state;
+	  	address.zipCode = addressOptions.zipCode;
+	  	address.countryCode = addressOptions.countryCode;
+	  	buyerOptions.shippingAddress = address;
+	  	buyerOptions.billingAddress = address;
+
+		buyer = new Buyer();
+		buyer.firstName = buyerOptions.firstName;
+		buyer.middleName = buyerOptions.middleName;
+		buyer.lastName = buyerOptions.lastName;
+		buyer.contact = buyerOptions.contact;
+		buyer.shippingAddress = buyerOptions.shippingAddress;
+		buyer.billingAddress = buyerOptions.billingAddress;
+
+		var itemAmountDetails = new ItemAmountDetails();
+		itemAmountDetails.shippingFee = itemAmountDetailsOptions.shippingFee;
+		itemAmountDetails.tax = itemAmountDetailsOptions.tax;
+		itemAmountDetails.subTotal = itemAmountDetailsOptions.subTotal;
+		itemAmountOptions.details = itemAmountDetails;
+
+		var itemAmount = new ItemAmount();
+		itemAmount.currency = itemAmountOptions.currency;
+		itemAmount.value = itemAmountOptions.value;
+		itemAmount.details = itemAmountOptions.details;
+		itemOptions.amount = itemAmount;
+		itemOptions.totalAmount = itemAmount;
+
+		item = new Item();
+		item.name = itemOptions.name;
+		item.code = itemOptions.code;
+		item.description = itemOptions.description;
+		item.amount = itemOptions.amount;
+		item.totalAmount = itemOptions.totalAmount;
 		items.push(item);
 
 		checkout = new Checkout();

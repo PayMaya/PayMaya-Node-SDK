@@ -11,7 +11,9 @@ describe('Contact', function() {
   	};
 
 	before(function(done) {
-		contact = new Contact(options);
+		contact = new Contact();
+		contact.phone = options.phone;
+		contact.email = options.email;
 		done();
 	});
 	

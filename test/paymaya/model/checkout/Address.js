@@ -15,7 +15,13 @@ describe('Address', function() {
 	};
 
 	before(function(done) {
-		address = new Address(options);
+		address = new Address();
+		address.line1 = options.line1;
+	  	address.line2 = options.line2;
+	  	address.city = options.city;
+	  	address.state = options.state;
+	  	address.zipCode = options.zipCode;
+	  	address.countryCode = options.countryCode;
 		done();
 	});
 	

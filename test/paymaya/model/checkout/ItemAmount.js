@@ -15,12 +15,20 @@ describe('ItemAmount', function() {
 
 	var itemAmountOptions = {
 		currency: "PHP",
-		value: "69.00",
-		details: new ItemAmountDetails(itemAmountDetailsOptions)
+		value: "69.00"
 	};
 
 	before(function(done) {
-		itemAmount = new ItemAmount(itemAmountOptions);
+		var itemAmountDetails = new ItemAmountDetails();
+		itemAmountDetails.shippingFee = itemAmountDetailsOptions.shippingFee;
+		itemAmountDetails.tax = itemAmountDetailsOptions.tax;
+		itemAmountDetails.subTotal = itemAmountDetailsOptions.subTotal;
+		itemAmountOptions.details = itemAmountDetails;
+
+		itemAmount = new ItemAmount();
+		itemAmount.currency = itemAmountOptions.currency;
+		itemAmount.value = itemAmountOptions.value;
+		itemAmount.details = itemAmountOptions.details;
 		done();
 	});
 	

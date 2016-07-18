@@ -16,20 +16,35 @@ describe('Item', function() {
 
 	var itemAmountOptions = {
 		currency: "PHP",
-		value: "69.00",
-		details: new ItemAmountDetails(itemAmountDetailsOptions)
+		value: "69.00"
 	};
 
 	var itemOptions = {
 		name: "Leather Belt",
 		code: "pm_belt",
-		description: "Medium-sv",
-		amount: new ItemAmount(itemAmountOptions),
-		totalAmount: new ItemAmount(itemAmountOptions)
+		description: "Medium-sv"
 	};
 
 	before(function(done) {
-		item = new Item(itemOptions);
+		var itemAmountDetails = new ItemAmountDetails();
+		itemAmountDetails.shippingFee = itemAmountDetailsOptions.shippingFee;
+		itemAmountDetails.tax = itemAmountDetailsOptions.tax;
+		itemAmountDetails.subTotal = itemAmountDetailsOptions.subTotal;
+		itemAmountOptions.details = itemAmountDetails;
+
+		var itemAmount = new ItemAmount();
+		itemAmount.currency = itemAmountOptions.currency;
+		itemAmount.value = itemAmountOptions.value;
+		itemAmount.details = itemAmountOptions.details;
+		itemOptions.amount = itemAmount;
+		itemOptions.totalAmount = itemAmount;
+
+		item = new Item();
+		item.name = itemOptions.name;
+		item.code = itemOptions.code;
+		item.description = itemOptions.description;
+		item.amount = itemOptions.amount;
+		item.totalAmount = itemOptions.totalAmount;
 		done();
 	});
 	

@@ -12,7 +12,10 @@ describe('ItemAmountDetails', function() {
 	};
 
 	before(function(done) {
-		itemAmountDetails = new ItemAmountDetails(options);
+		itemAmountDetails = new ItemAmountDetails();
+		itemAmountDetails.shippingFee = options.shippingFee;
+		itemAmountDetails.tax = options.tax;
+		itemAmountDetails.subTotal = options.subTotal;
 		done();
 	});
 	
