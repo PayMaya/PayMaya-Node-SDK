@@ -29,7 +29,7 @@ function User() {
   var address = new Address(addressOptions);
   this._shippingAddress = address;
   this._billingAddress = address;
-};
+}
 
 User.prototype = {
 
