@@ -3,7 +3,7 @@ var Customization = require("./../../lib/paymaya/api/Customization");
 
 (function() {
 	
-	// Initialize Paymaya SDK with Checkout API key, secret key and environment(SANDBOX or PRODUCTION)
+	// Initialize Paymaya SDK with Checkout API key, secret key and environment(SANDBOX or PRODUCTION) to use shop customization
 	paymayaSdk.initCheckout("pk-iaioBC2pbY6d3BVRSebsJxghSHeJDW4n6navI7tYdrN", "sk-uh4ZFfx9i0rZpKN6CxJ826nVgJ4saGGVAH9Hk7WrY6Q", paymayaSdk.ENVIRONMENT.SANDBOX);
 
 	// Initialize Customization
