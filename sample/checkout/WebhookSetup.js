@@ -46,7 +46,6 @@ function _executeRetrieveWebhooks(webhook) {
 }
 
 function _executeUpdateWebhook(webhook) {
-	webhook.name = "CHECKOUT_SUCCESS";
 	webhook.callbackUrl = "http://shop.someserver.com/success_update";
 
 	var onUpdateWebhook = function(err, response) {
