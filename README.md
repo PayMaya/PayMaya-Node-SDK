@@ -70,58 +70,94 @@ var checkout = new Checkout();
 ##### 3. Execute Checkout API
 * Initiate Checkout - Checkout service entry point. It returns a checkoutId, and checkoutUrl. Use the checkoutUrl to redirect the buyer to the Checkout page.
 ```javascript
-/**
-* Construct buyer here
-*/
+var YOUR_REQUEST_REFERENCE_NUMBER = "123456789";
+
 var addressOptions = {
-	  	line1 : "9F Robinsons Cybergate 3",
-	  	line2 : "Pioneer Street",
-	  	city : "Mandaluyong City",
-	  	state : "Metro Manila",
-	  	zipCode : "12345",
-	  	countryCode : "PH"
+  	line1 : "9F Robinsons Cybergate 3",
+  	line2 : "Pioneer Street",
+  	city : "Mandaluyong City",
+  	state : "Metro Manila",
+  	zipCode : "12345",
+  	countryCode : "PH"
 };
 
 var contactOptions = {
- 		phone : "+63(2)1234567890",
- 		email : "paymayabuyer1@gmail.com"
+ 	phone : "+63(2)1234567890",
+ 	email : "paymayabuyer1@gmail.com"
 };
 
 var buyerOptions = {
- 	firstName : "John",
- 	middleName : "Michaels",
- 	lastName : "Doe",
- 	contact : new Contact(contactOptions),
- 	shippingAddress : new Address(addressOptions),
- 	billingAddress : new Address(addressOptions)
+	firstName : "John",
+	middleName : "Michaels",
+	lastName : "Doe"
 };
 	
-var buyer = new Buyer(buyerOptions);
+var contact = new Contact();
+contact.phone = contactOptions.phone;
+contact.email = contactOptions.email;
+buyerOptions.contact = contact;
+
+var address = new Address();
+address.line1 = addressOptions.line1;
+address.line2 = addressOptions.line2;
+address.city = addressOptions.city;
+address.state = addressOptions.state;
+address.zipCode = addressOptions.zipCode;
+address.countryCode = addressOptions.countryCode;
+buyerOptions.shippingAddress = address;
+buyerOptions.billingAddress = address;
+	  	
+/**
+* Construct buyer here
+*/
+var buyer = new Buyer();
+buyer.firstName = buyerOptions.firstName;
+buyer.middleName = buyerOptions.middleName;
+buyer.lastName = buyerOptions.lastName;
+buyer.contact = buyerOptions.contact;
+buyer.shippingAddress = buyerOptions.shippingAddress;
+buyer.billingAddress = buyerOptions.billingAddress;
+
 
 var itemAmountDetailsOptions = {
-		shippingFee: "14.00",
-		tax: "5.00",
-		subTotal: "50.00" 
+	shippingFee: "14.00",
+	tax: "5.00",
+	subTotal: "50.00" 
 };
 
 var itemAmountOptions = {
-		currency: "PHP",
-		value: "69.00",
-		details: new ItemAmountDetails(itemAmountDetailsOptions)
+	currency: "PHP",
+	value: "69.00"
 };
 
 var itemOptions = {
-		name: "Leather Belt",
-		code: "pm_belt",
-		description: "Medium-sv",
-		amount: new ItemAmount(itemAmountOptions),
-		totalAmount: new ItemAmount(itemAmountOptions)
+	name: "Leather Belt",
+	code: "pm_belt",
+	description: "Medium-sv"
 };
+
+var itemAmountDetails = new ItemAmountDetails();
+itemAmountDetails.shippingFee = itemAmountDetailsOptions.shippingFee;
+itemAmountDetails.tax = itemAmountDetailsOptions.tax;
+itemAmountDetails.subTotal = itemAmountDetailsOptions.subTotal;
+itemAmountOptions.details = itemAmountDetails;
+
+var itemAmount = new ItemAmount();
+itemAmount.currency = itemAmountOptions.currency;
+itemAmount.value = itemAmountOptions.value;
+itemAmount.details = itemAmountOptions.details;
+itemOptions.amount = itemAmount;
+itemOptions.totalAmount = itemAmount;
 
 /**
 * Contruct item here
 */
-var	item = new Item(itemOptions);
+var item = new Item();
+item.name = itemOptions.name;
+item.code = itemOptions.code;
+item.description = itemOptions.description;
+item.amount = itemOptions.amount;
+item.totalAmount = itemOptions.totalAmount;
 
 // Add all items here
 var items = [];
