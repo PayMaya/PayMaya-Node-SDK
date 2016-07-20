@@ -1,12 +1,19 @@
-# engines:
-  # duplication:
-    # enabled: true
-    # config:
-      # languages:
-      # - javascript
-    # checks:
-      # Similar code:
-        # enabled: false
+engines:
+  duplication:
+    enabled: true
+    config:
+      languages:
+      - javascript
+    checks:
+      Similar code:
+        enabled: false
+  eslint:
+    enabled: true
+  csslint:
+    enabled: true
+ratings:
+  paths:
+  - lib/**
 exclude_paths:
 - node_modules/
 - sample/
