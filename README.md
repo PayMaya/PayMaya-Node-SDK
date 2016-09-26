@@ -24,19 +24,19 @@ npm install paymaya-node-sdk
 
 #### _API Keys_
 To use your PayMaya Node SDK, you need to have a different API key for Sandbox and Production environment.
- 
+
 ##### _Sandbox Environment_
- 
+
 Sandbox credentials are useful for testing application integration. All transactions and money flow made in this environment are only simulated and does not reflect your production records. The following sandbox API key can be used for testing purposes:
 
  ```
-Public-facing API Key: pk-iaioBC2pbY6d3BVRSebsJxghSHeJDW4n6navI7tYdrN
+Public-facing API Key: pk-3xHUatfWGUo99aJyvs6HO8DI7844WhIaUq3ZjYO0JMz
 
-Secret API Key: sk-uh4ZFfx9i0rZpKN6CxJ826nVgJ4saGGVAH9Hk7WrY6Q
+Secret API Key: sk-cV7iWN4htmUZHEZwV28wQo94JHwiiU5a67RLj0jjq4T
 ```
- 
+
 ##### _Production Environment_
- 
+
 Upon successful integration testing, you can then request for production credentials. Upon receipt, just change your SDK initialization to use production environment to start accepting live transactions.
 
 ## Usage
@@ -69,10 +69,11 @@ var checkout = new Checkout();
 
 ##### 3. Execute Checkout API
 * Initiate Checkout - Checkout service entry point. It returns a checkoutId, and checkoutUrl. Use the checkoutUrl to redirect the buyer to the Checkout page.
+
 ```javascript
 var YOUR_REQUEST_REFERENCE_NUMBER = "123456789";
 
-var addressOptions = {
+var address = {
   	line1 : "9F Robinsons Cybergate 3",
   	line2 : "Pioneer Street",
   	city : "Mandaluyong City",
@@ -81,87 +82,47 @@ var addressOptions = {
   	countryCode : "PH"
 };
 
-var contactOptions = {
- 	phone : "+63(2)1234567890",
- 	email : "paymayabuyer1@gmail.com"
-};
-
-var buyerOptions = {
+var buyer = {
 	firstName : "John",
 	middleName : "Michaels",
-	lastName : "Doe"
-};
-	
-var contact = new Contact();
-contact.phone = contactOptions.phone;
-contact.email = contactOptions.email;
-buyerOptions.contact = contact;
-
-var address = new Address();
-address.line1 = addressOptions.line1;
-address.line2 = addressOptions.line2;
-address.city = addressOptions.city;
-address.state = addressOptions.state;
-address.zipCode = addressOptions.zipCode;
-address.countryCode = addressOptions.countryCode;
-buyerOptions.shippingAddress = address;
-buyerOptions.billingAddress = address;
-	  	
-/**
-* Construct buyer here
-*/
-var buyer = new Buyer();
-buyer.firstName = buyerOptions.firstName;
-buyer.middleName = buyerOptions.middleName;
-buyer.lastName = buyerOptions.lastName;
-buyer.contact = buyerOptions.contact;
-buyer.shippingAddress = buyerOptions.shippingAddress;
-buyer.billingAddress = buyerOptions.billingAddress;
-
-
-var itemAmountDetailsOptions = {
-	shippingFee: "14.00",
-	tax: "5.00",
-	subTotal: "50.00" 
+	lastName : "Doe",
+  contact: {
+   	phone : "+63(2)1234567890",
+   	email : "paymayabuyer1@gmail.com"
+  },
+  billingAddress: address,
+  shippingAddress: address
 };
 
-var itemAmountOptions = {
+var amountDetails = {
+  shippingFee: "14.00",
+  tax: "5.00",
+  subTotal: "50.00"
+};
+
+var amount = {
 	currency: "PHP",
-	value: "69.00"
+	value: "69.00",
+  details: amountDetails
 };
 
-var itemOptions = {
+var item = {
 	name: "Leather Belt",
 	code: "pm_belt",
-	description: "Medium-sv"
+	description: "Medium-sv",
+  quantity: "1",
+  details: amountDetails,
+  amount: amount,
+  totalAmount: amount
 };
 
-var itemAmountDetails = new ItemAmountDetails();
-itemAmountDetails.shippingFee = itemAmountDetailsOptions.shippingFee;
-itemAmountDetails.tax = itemAmountDetailsOptions.tax;
-itemAmountDetails.subTotal = itemAmountDetailsOptions.subTotal;
-itemAmountOptions.details = itemAmountDetails;
+var items = [item];
 
-var itemAmount = new ItemAmount();
-itemAmount.currency = itemAmountOptions.currency;
-itemAmount.value = itemAmountOptions.value;
-itemAmount.details = itemAmountOptions.details;
-itemOptions.amount = itemAmount;
-itemOptions.totalAmount = itemAmount;
-
-/**
-* Contruct item here
-*/
-var item = new Item();
-item.name = itemOptions.name;
-item.code = itemOptions.code;
-item.description = itemOptions.description;
-item.amount = itemOptions.amount;
-item.totalAmount = itemOptions.totalAmount;
-
-// Add all items here
-var items = [];
-items.push(item);
+var redirectUrl = {
+ "success": "http://shop.someserver.com/success?id=6319921",
+  "failure": "http://shop.someserver.com/failure?id=6319921",
+  "cancel": "http://shop.someserver.com/cancel?id=6319921"
+};
 
 checkout.buyer = buyer;
 checkout.totalAmount = itemOptions.totalAmount;
@@ -170,6 +131,87 @@ checkout.items = items;
 
 checkout.execute(callback);
 ```
+
+Information about the buyer, items inside the cart, and total amount are needed to create a new checkout. Refer to the tables below for more information.
+
+##### Checkout object
+
+| Properties             | type                 | required? |
+|------------------------|----------------------|-----------|
+| buyer                  | buyer object         | yes       |
+| totalAmount            | amount object        | yes       |
+| items                  | list of item objects | yes       |
+| requestReferenceNumber | string               | yes       |
+| redirectUrl            | redirect URL object  | no        |
+
+##### Buyer object
+
+| Properties      | type           | required? |
+|-----------------|----------------|-----------|
+| firstName       | string         | yes       |
+| middleName      | string         | no        |
+| lastName        | string         | yes       |
+| contact         | contact object | no        |
+| billingAddress  | address object | yes       |
+| shippingAddress | address object | no        |
+
+##### Contact object
+
+| Properties | type   | required? |
+|------------|--------|-----------|
+| phone      | string | no        |
+| email      | string | no        |
+
+##### Address object
+
+| Properties  | type   | required? |
+|-------------|--------|-----------|
+| line1       | string | yes       |
+| line2       | string | no        |
+| city        | string | yes       |
+| state       | string | yes       |
+| zipCode     | string | yes       |
+| countryCode | string | yes       |
+
+
+##### Total Amount object
+
+| Properties | type                  | required? |
+|------------|-----------------------|-----------|
+| value      | string                | yes       |
+| currency   | string                | no        |
+| details    | amount details object | yes       |
+
+##### Amount Details object
+
+| Properties    | type   | required? |
+|---------------|--------|-----------|
+| subtotal      | string | yes       |
+| tax           | string | no        |
+| shippingFee   | string | no        |
+| serviceCharge | string | no        |
+| discount      | string | no        |
+
+##### Item object
+
+| Properties  | type          | required? |
+|-------------|---------------|-----------|
+| name        | string        | yes       |
+| code        | string        | no        |
+| description | string        | no        |
+| quantity    | string        | yes       |
+| amount      | amount object | yes       |
+| totalAmount | amount object | yes       |
+
+##### redirect URL object
+
+| Properties  | type          | required? |
+|-------------|---------------|-----------|
+| success     | string        | no        |
+| failure     | string        | no        |
+| cancel      | string        | no        |
+
+Check https://developers.paymaya.com/blog/entry/paymaya-checkout-api-overview for more information.
 
 * Retrieve Checkout - Use this call to get information about a checkout identified by a checkoutId.
 ```javascript
