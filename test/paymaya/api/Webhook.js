@@ -1,3 +1,4 @@
+var keys = require("./../../keys.json");
 var chai = require('chai');
 var should = chai.should();
 
@@ -5,9 +6,8 @@ var paymayaSdk = require("./../../../lib/paymaya/PaymayaSDK");
 var Webhook = require("./../../../lib/paymaya/api/Webhook");
 
 describe('Webhook', function() {
-
 	var webhook;
-	
+
 	var webhookOptions = {
 		name: "CHECKOUT_SUCCESS",
 		callbackUrl: "http://shop.someserver.com/success",
@@ -15,37 +15,33 @@ describe('Webhook', function() {
 	};
 
 	before(function(done) {
-		paymayaSdk.initCheckout("pk-iaioBC2pbY6d3BVRSebsJxghSHeJDW4n6navI7tYdrN", "sk-uh4ZFfx9i0rZpKN6CxJ826nVgJ4saGGVAH9Hk7WrY6Q", paymayaSdk.ENVIRONMENT.SANDBOX);
+		paymayaSdk.initCheckout(keys.publicKey, keys.secretKey, paymayaSdk.ENVIRONMENT.SANDBOX);
 
+		//delete all webhooks that are already registered
 		webhook = new Webhook();
-		webhook.name = webhookOptions.name;
-		webhook.callbackUrl = webhookOptions.callbackUrl;
-		done();
-	});
-	
-	it('should have name property', function(done) {
-		webhook.should.have.property('name');
-		done();
+		webhook.retrieve(function(err, result) {
+			if(result.length === 0) {
+				done();
+			}
+
+			var finished = 0;
+
+			function webhookDeleted() {
+				if(++finished === result.length) done();
+			}
+
+			result.forEach(function(webhookObj) {
+				var registeredWebhook = new Webhook();
+				registeredWebhook.id = webhookObj.id;
+				registeredWebhook.delete(function(err) {
+					webhookDeleted();
+				});
+			});
+		});
 	});
 
-	it('should have callbackUrl property', function(done) {
-		webhook.should.have.property('callbackUrl');
-		done();
-	});
-
-	it('should have id property', function(done) {
-		webhook.should.have.property('id');
-		done();
-	});
-
-	it('should return correct name value', function(done) {
-		webhook.name.should.equal(webhookOptions.name);
-		done();
-	});
-
-	it('should return correct callbackUrl value', function(done) {
-		webhook.callbackUrl.should.equal(webhookOptions.callbackUrl);
-		done();
+	beforeEach(function() {
+		webhook = new Webhook();
 	});
 
 	it('should execute register webhook successfully', function(done) {
@@ -54,6 +50,8 @@ describe('Webhook', function() {
   			should.exist(response);
   			done();
 		}
+		webhook.name = webhookOptions.name;
+		webhook.callbackUrl = webhookOptions.callbackUrl;
 		webhook.register(callback);
 	});
 
@@ -68,22 +66,26 @@ describe('Webhook', function() {
 	});
 
 	it('should execute update webhook successfully', function(done) {
-		webhook.name = webhookOptions.name;
-		webhook.callbackUrl = webhookOptions.callbackUrlUpdate;
-		var callback = function(err, response) {
-			should.not.exist(err);
-  			should.exist(response);
-  			done();
-		}
-		webhook.update(callback);
+		webhook.retrieve(function(err, result) {
+			webhook.id = result[0].id;
+			webhook.name = webhookOptions.name;
+			webhook.callbackUrl = webhookOptions.callbackUrlUpdate;
+			webhook.update(function(err, response) {
+				should.not.exist(err);
+	  			should.exist(response);
+	  			done();
+			});
+		});
 	});
 
 	it('should execute delete webhook successfully', function(done) {
-		var callback = function(err, response) {
-			should.not.exist(err);
-  			should.exist(response);
-  			done();
-		}
-		webhook.delete(callback);
+		webhook.retrieve(function(err, result) {
+			webhook.id = result[0].id;
+			webhook.delete(function(err, response) {
+				should.not.exist(err);
+	  			should.exist(response);
+	  			done();
+			});
+		});
 	});
 });

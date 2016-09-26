@@ -1,3 +1,4 @@
+var keys = require("./../../keys.json");
 var chai = require('chai');
 var should = chai.should();
 
@@ -7,7 +8,7 @@ var Customization = require("./../../../lib/paymaya/api/Customization");
 describe('Customization', function() {
 
 	var customization;
-	
+
 	var customizationOptions = {
 		logoUrl: "https://cdn.paymaya.com/production/checkout_api/customization_example/yourlogo.svg",
 		iconUrl: "https://cdn.paymaya.com/production/checkout_api/customization_example/youricon.ico",
@@ -17,7 +18,7 @@ describe('Customization', function() {
 	};
 
 	before(function(done) {
-		paymayaSdk.initCheckout("pk-iaioBC2pbY6d3BVRSebsJxghSHeJDW4n6navI7tYdrN", "sk-uh4ZFfx9i0rZpKN6CxJ826nVgJ4saGGVAH9Hk7WrY6Q", paymayaSdk.ENVIRONMENT.SANDBOX);
+		paymayaSdk.initCheckout(keys.publicKey, keys.secretKey, paymayaSdk.ENVIRONMENT.SANDBOX);
 
 		customization = new Customization();
 		customization.logoUrl = customizationOptions.logoUrl;
@@ -27,7 +28,7 @@ describe('Customization', function() {
 		customization.colorScheme = customizationOptions.colorScheme;
 		done();
 	});
-	
+
 	it('should have logoUrl property', function(done) {
 		customization.should.have.property('logoUrl');
 		done();
