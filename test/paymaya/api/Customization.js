@@ -17,103 +17,96 @@ describe('Customization', function() {
 		colorScheme: "#368d5c"
 	};
 
-	before(function(done) {
+	before(function() {
 		paymayaSdk.initCheckout(keys.publicKey, keys.secretKey, paymayaSdk.ENVIRONMENT.SANDBOX);
-
-		customization = new Customization();
-		customization.logoUrl = customizationOptions.logoUrl;
-		customization.iconUrl = customizationOptions.iconUrl;
-		customization.appleTouchIconUrl = customizationOptions.appleTouchIconUrl;
-		customization.customTitle = customizationOptions.customTitle;
-		customization.colorScheme = customizationOptions.colorScheme;
-		done();
 	});
 
-	it('should have logoUrl property', function(done) {
-		customization.should.have.property('logoUrl');
-		done();
+	context("when using callbacks", function() {
+		before(function() {
+			customization = new Customization();
+			customization.logoUrl = customizationOptions.logoUrl;
+			customization.iconUrl = customizationOptions.iconUrl;
+			customization.appleTouchIconUrl = customizationOptions.appleTouchIconUrl;
+			customization.customTitle = customizationOptions.customTitle;
+			customization.colorScheme = customizationOptions.colorScheme;
+		});
+
+		it('should execute set customization successfully', function(done) {
+			var callback = function(err, result) {
+				should.not.exist(err);
+				result.should.exist;
+				result.logoUrl.should.equal(customizationOptions.logoUrl);
+				result.iconUrl.should.equal(customizationOptions.iconUrl);
+				result.appleTouchIconUrl.should.equal(customizationOptions.appleTouchIconUrl);
+				result.customTitle.should.equal(customizationOptions.customTitle);
+				result.colorScheme.should.equal(customizationOptions.colorScheme);
+				done();
+			}
+			customization.set(callback);
+		});
+
+		it('should execute get customization successfully', function(done) {
+			var callback = function(err, result) {
+				should.not.exist(err);
+				result.should.exist;
+				result.logoUrl.should.equal(customizationOptions.logoUrl);
+				result.iconUrl.should.equal(customizationOptions.iconUrl);
+				result.appleTouchIconUrl.should.equal(customizationOptions.appleTouchIconUrl);
+				result.customTitle.should.equal(customizationOptions.customTitle);
+				result.colorScheme.should.equal(customizationOptions.colorScheme);
+				done();
+			}
+			customization.get(callback);
+		});
+
+		it('should execute remove customization successfully', function(done) {
+			var callback = function(err, result) {
+				should.not.exist(err);
+				result.should.exist;
+				result.should.have.property('message');
+				done();
+			}
+			customization.remove(callback);
+		});
 	});
 
-	it('should have iconUrl property', function(done) {
-		customization.should.have.property('iconUrl');
-		done();
-	});
+	context("when using promises", function() {
+		before(function() {
+			customization = new Customization();
+			customization.logoUrl = customizationOptions.logoUrl;
+			customization.iconUrl = customizationOptions.iconUrl;
+			customization.appleTouchIconUrl = customizationOptions.appleTouchIconUrl;
+			customization.customTitle = customizationOptions.customTitle;
+			customization.colorScheme = customizationOptions.colorScheme;
+		});
 
-	it('should have appleTouchIconUrl property', function(done) {
-		customization.should.have.property('appleTouchIconUrl');
-		done();
-	});
+		it("should execute set customization successfully", function(done) {
+			customization.set().then(function(result) {
+				result.should.exist;
+				result.logoUrl.should.equal(customizationOptions.logoUrl);
+				result.iconUrl.should.equal(customizationOptions.iconUrl);
+				result.appleTouchIconUrl.should.equal(customizationOptions.appleTouchIconUrl);
+				result.customTitle.should.equal(customizationOptions.customTitle);
+				result.colorScheme.should.equal(customizationOptions.colorScheme);
+			}).then(done);
+		});
 
-	it('should have customTitle property', function(done) {
-		customization.should.have.property('customTitle');
-		done();
-	});
+		it("should execute get customization successfully", function(done) {
+			customization.get().then(function(result) {
+				result.should.exist;
+				result.logoUrl.should.equal(customizationOptions.logoUrl);
+				result.iconUrl.should.equal(customizationOptions.iconUrl);
+				result.appleTouchIconUrl.should.equal(customizationOptions.appleTouchIconUrl);
+				result.customTitle.should.equal(customizationOptions.customTitle);
+				result.colorScheme.should.equal(customizationOptions.colorScheme);
+			}).then(done);
+		});
 
-	it('should have colorScheme property', function(done) {
-		customization.should.have.property('colorScheme');
-		done();
-	});
-
-	it('should return correct logoUrl value', function(done) {
-		customization.logoUrl.should.equal(customizationOptions.logoUrl);
-		done();
-	});
-
-	it('should return correct iconUrl value', function(done) {
-		customization.iconUrl.should.equal(customizationOptions.iconUrl);
-		done();
-	});
-
-	it('should return correct appleTouchIconUrl value', function(done) {
-		customization.appleTouchIconUrl.should.equal(customizationOptions.appleTouchIconUrl);
-		done();
-	});
-
-	it('should return correct customTitle value', function(done) {
-		customization.customTitle.should.equal(customizationOptions.customTitle);
-		done();
-	});
-
-	it('should return correct logocolorSchemeUrl value', function(done) {
-		customization.colorScheme.should.equal(customizationOptions.colorScheme);
-		done();
-	});
-
-	it('should execute set customization successfully', function(done) {
-		var callback = function(err, response) {
-			should.not.exist(err);
-  			should.exist(response);
-  			response.should.have.property('logoUrl');
-  			response.should.have.property('iconUrl');
-  			response.should.have.property('appleTouchIconUrl');
-  			response.should.have.property('customTitle');
-  			response.should.have.property('colorScheme');
-  			done();
-		}
-		customization.set(callback);
-	});
-
-	it('should execute get customization successfully', function(done) {
-		var callback = function(err, response) {
-			should.not.exist(err);
-  			should.exist(response);
-  			response.should.have.property('logoUrl');
-  			response.should.have.property('iconUrl');
-  			response.should.have.property('appleTouchIconUrl');
-  			response.should.have.property('customTitle');
-  			response.should.have.property('colorScheme');
-  			done();
-		}
-		customization.get(callback);
-	});
-
-	it('should execute remove customization successfully', function(done) {
-		var callback = function(err, response) {
-			should.not.exist(err);
-  			should.exist(response);
-  			response.should.have.property('message');
-  			done();
-		}
-		customization.remove(callback);
+		it("should execute remove customization successfully", function(done) {
+			customization.remove().then(function(result) {
+				result.should.exist;
+				result.should.have.property("message");
+			}).then(done);
+		});
 	});
 });

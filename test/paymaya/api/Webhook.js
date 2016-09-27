@@ -44,48 +44,89 @@ describe('Webhook', function() {
 		webhook = new Webhook();
 	});
 
-	it('should execute register webhook successfully', function(done) {
-		var callback = function(err, response) {
-			should.not.exist(err);
-  			should.exist(response);
-  			done();
-		}
-		webhook.name = webhookOptions.name;
-		webhook.callbackUrl = webhookOptions.callbackUrl;
-		webhook.register(callback);
-	});
-
-	it('should execute retrieve webhook successfully', function(done) {
-		var callback = function(err, response) {
-			should.not.exist(err);
-  			should.exist(response);
-  			webhookId = response[0].id;
-  			done();
-		}
-		webhook.retrieve(callback);
-	});
-
-	it('should execute update webhook successfully', function(done) {
-		webhook.retrieve(function(err, result) {
-			webhook.id = result[0].id;
-			webhook.name = webhookOptions.name;
-			webhook.callbackUrl = webhookOptions.callbackUrlUpdate;
-			webhook.update(function(err, response) {
+	context("when using callbacks", function() {
+		it('should execute register webhook successfully', function(done) {
+			var callback = function(err, response) {
 				should.not.exist(err);
-	  			should.exist(response);
-	  			done();
+					should.exist(response);
+					done();
+			}
+			webhook.name = webhookOptions.name;
+			webhook.callbackUrl = webhookOptions.callbackUrl;
+			webhook.register(callback);
+		});
+
+		it('should execute retrieve webhook successfully', function(done) {
+			var callback = function(err, response) {
+				should.not.exist(err);
+					should.exist(response);
+					webhookId = response[0].id;
+					done();
+			}
+			webhook.retrieve(callback);
+		});
+
+		it('should execute update webhook successfully', function(done) {
+			webhook.retrieve(function(err, result) {
+				webhook.id = result[0].id;
+				webhook.name = webhookOptions.name;
+				webhook.callbackUrl = webhookOptions.callbackUrlUpdate;
+				webhook.update(function(err, response) {
+					should.not.exist(err);
+						should.exist(response);
+						done();
+				});
+			});
+		});
+
+		it('should execute delete webhook successfully', function(done) {
+			webhook.retrieve(function(err, result) {
+				webhook.id = result[0].id;
+				webhook.delete(function(err, response) {
+					should.not.exist(err);
+						should.exist(response);
+						done();
+				});
 			});
 		});
 	});
 
-	it('should execute delete webhook successfully', function(done) {
-		webhook.retrieve(function(err, result) {
-			webhook.id = result[0].id;
-			webhook.delete(function(err, response) {
-				should.not.exist(err);
-	  			should.exist(response);
-	  			done();
-			});
+	context("when using promises", function() {
+		it("should execute register webhook successfully", function(done) {
+			webhook.name = webhookOptions.name;
+			webhook.callbackUrl = webhookOptions.callbackUrl;
+			webhook.register().then(function(result) {
+				result.should.exist;
+				result.callbackUrl.should.equal(webhookOptions.callbackUrl);
+			}).then(done);
+		});
+
+		it("should execute retrieve webhook successfully", function(done) {
+			webhook.retrieve().then(function(result) {
+				result.should.exist;
+			}).then(done);
+		});
+
+		it("should execute update webhook successfully", function(done) {
+			webhook.retrieve().then(function(result) {
+				webhook.id = result[0].id;
+				webhook.name = webhookOptions.name;
+				webhook.callbackUrl = webhookOptions.callbackUrlUpdate;
+			}).then(function() {
+				return webhook.update();
+			}).then(function(result) {
+				result.should.exist;
+			}).then(done);
+		});
+
+		it("should execute delete webhook successfully", function(done) {
+			webhook.retrieve().then(function(result) {
+				webhook.id = result[0].id;
+			}).then(function() {
+				return webhook.delete();
+			}).then(function(result) {
+				result.should.exist;
+			}).then(done);
 		});
 	});
 });

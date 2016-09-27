@@ -64,44 +64,82 @@ describe('Checkout', function() {
 	});
 
 	context("when parameters are valid", function() {
-		before(function() {
-			checkout = new Checkout();
-			checkout.buyer = buyer;
-			checkout.items = items;
-			checkout.totalAmount = item.totalAmount;
-			checkout.requestReferenceNumber = requestReferenceNumber;
+		context("when using callbacks", function() {
+			before(function() {
+				checkout = new Checkout();
+				checkout.buyer = buyer;
+				checkout.items = items;
+				checkout.totalAmount = item.totalAmount;
+				checkout.requestReferenceNumber = requestReferenceNumber;
+			});
+
+			it('should execute initiate checkout successfully', function(done) {
+				var callback = function(err, response) {
+					should.not.exist(err);
+					should.exist(response);
+					response.should.have.property('checkoutId');
+					response.should.have.property('redirectUrl');
+					done();
+				}
+				checkout.execute(callback);
+			});
+
+			it('should execute retrieve checkout successfully', function(done) {
+				var callback = function(err, response) {
+					should.not.exist(err);
+					should.exist(response);
+					response.should.have.property('merchant');
+					response.should.have.property('buyer');
+					response.should.have.property('items');
+					response.should.have.property('status');
+					response.should.have.property('id');
+					response.should.have.property('totalAmount');
+					response.should.have.property('requestReferenceNumber');
+					response.should.have.property('paymentStatus');
+					response.should.have.property('paymentType');
+					response.should.have.property('voidStatus');
+					response.should.have.property('transactionReferenceNumber');
+					response.should.have.property('receiptNumber');
+					done();
+				}
+				checkout.retrieve(callback);
+			});
 		});
 
-		it('should execute initiate checkout successfully', function(done) {
-			var callback = function(err, response) {
-				should.not.exist(err);
-				should.exist(response);
-				response.should.have.property('checkoutId');
-				response.should.have.property('redirectUrl');
-				done();
-			}
-			checkout.execute(callback);
-		});
+		context("when using promises", function() {
+			before(function() {
+				checkout = new Checkout();
+				checkout.buyer = buyer;
+				checkout.items = items;
+				checkout.totalAmount = item.totalAmount;
+				checkout.requestReferenceNumber = requestReferenceNumber;
+			});
 
-		it('should execute retrieve checkout successfully', function(done) {
-			var callback = function(err, response) {
-				should.not.exist(err);
-				should.exist(response);
-				response.should.have.property('merchant');
-				response.should.have.property('buyer');
-				response.should.have.property('items');
-				response.should.have.property('status');
-				response.should.have.property('id');
-				response.should.have.property('totalAmount');
-				response.should.have.property('requestReferenceNumber');
-				response.should.have.property('paymentStatus');
-				response.should.have.property('paymentType');
-				response.should.have.property('voidStatus');
-				response.should.have.property('transactionReferenceNumber');
-				response.should.have.property('receiptNumber');
-				done();
-			}
-			checkout.retrieve(callback);
+			it("should execute initiate checkout successfully", function(done) {
+				checkout.execute().then(function(response) {
+					response.should.exist;
+					response.should.have.property("checkoutId");
+					response.should.have.property("redirectUrl");
+				}).then(done);
+			});
+
+			it("should execute retrieve checkout successfully", function(done) {
+				checkout.retrieve().then(function(response) {
+					response.should.exist;
+					response.should.have.property('merchant');
+					response.should.have.property('buyer');
+					response.should.have.property('items');
+					response.should.have.property('status');
+					response.should.have.property('id');
+					response.should.have.property('totalAmount');
+					response.should.have.property('requestReferenceNumber');
+					response.should.have.property('paymentStatus');
+					response.should.have.property('paymentType');
+					response.should.have.property('voidStatus');
+					response.should.have.property('transactionReferenceNumber');
+					response.should.have.property('receiptNumber');
+				}).then(done);
+			});
 		});
 	});
 
@@ -110,58 +148,118 @@ describe('Checkout', function() {
 			checkout = new Checkout();
 		});
 
-		context("when buyer is missing", function() {
-			it("should return an error", function(done) {
-				checkout.items = items;
-				checkout.totalAmount = itemAmount;
-				checkout.requestReferenceNumber = requestReferenceNumber;
-				checkout.execute(function(err, response) {
-					err.should.exist;
-					err.should.be.instanceOf(PaymayaApiError);
-					err.message.should.equal("Missing buyer");
-					done();
+		context("when using callbacks", function() {
+			context("when buyer is missing", function() {
+				it("should return an error", function(done) {
+					checkout.items = items;
+					checkout.totalAmount = itemAmount;
+					checkout.requestReferenceNumber = requestReferenceNumber;
+					checkout.execute(function(err, response) {
+						err.should.exist;
+						err.should.be.instanceOf(PaymayaApiError);
+						err.message.should.equal("Missing buyer");
+						done();
+					});
+				});
+			});
+
+			context("when items are missing", function() {
+				it("should return an error", function(done) {
+					checkout.buyer = buyer;
+					checkout.totalAmount = itemAmount;
+					checkout.requestReferenceNumber = requestReferenceNumber;
+					checkout.execute(function(err, response) {
+						err.should.exist;
+						err.should.be.instanceOf(PaymayaApiError);
+						err.message.should.equal("Missing items");
+						done();
+					});
+				});
+			});
+
+			context("when total amount is missing", function() {
+				it("should return an error", function(done) {
+					checkout.buyer = buyer;
+					checkout.items = items;
+					checkout.requestReferenceNumber = requestReferenceNumber;
+					checkout.execute(function(err, response) {
+						err.should.exist;
+						err.should.be.instanceOf(PaymayaApiError);
+						err.message.should.equal("Missing totalAmount");
+						done();
+					});
+				});
+			});
+
+			context("when request reference number is missing", function() {
+				it("should return an error", function(done) {
+					checkout.buyer = buyer;
+					checkout.items = items;
+					checkout.totalAmount = itemAmount;
+					checkout.execute(function(err, response) {
+						err.should.exist;
+						err.should.be.instanceOf(PaymayaApiError);
+						err.message.should.equal("Missing requestReferenceNumber");
+						done();
+					});
 				});
 			});
 		});
 
-		context("when items are missing", function() {
-			it("should return an error", function(done) {
-				checkout.buyer = buyer;
-				checkout.totalAmount = itemAmount;
-				checkout.requestReferenceNumber = requestReferenceNumber;
-				checkout.execute(function(err, response) {
-					err.should.exist;
-					err.should.be.instanceOf(PaymayaApiError);
-					err.message.should.equal("Missing items");
-					done();
+		context("when using promises", function() {
+			context("when buyer is missing", function() {
+				it("should return an error", function(done) {
+					checkout.items = items;
+					checkout.totalAmount = itemAmount;
+					checkout.requestReferenceNumber = requestReferenceNumber;
+					checkout.execute().catch(function(err) {
+						err.should.exist;
+						err.should.be.instanceOf(PaymayaApiError);
+						err.message.should.equal("Missing buyer");
+						done();
+					});
 				});
 			});
-		});
 
-		context("when total amount is missing", function() {
-			it("should return an error", function(done) {
-				checkout.buyer = buyer;
-				checkout.items = items;
-				checkout.requestReferenceNumber = requestReferenceNumber;
-				checkout.execute(function(err, response) {
-					err.should.exist;
-					err.should.be.instanceOf(PaymayaApiError);
-					err.message.should.equal("Missing totalAmount");
-					done();
+			context("when items are missing", function() {
+				it("should return an error", function(done) {
+					checkout.buyer = buyer;
+					checkout.totalAmount = itemAmount;
+					checkout.requestReferenceNumber = requestReferenceNumber;
+					checkout.execute().catch(function(err) {
+						err.should.exist;
+						err.should.be.instanceOf(PaymayaApiError);
+						err.message.should.equal("Missing items");
+						done();
+					});
 				});
 			});
-		});
 
-		context("when request reference number is missing", function() {
-			it("should return an error", function(done) {
-				checkout.buyer = buyer;
-				checkout.items = items;
-				checkout.totalAmount = itemAmount;
-				checkout.execute(function(err, response) {
-					err.should.exist;
-					err.should.be.instanceOf(PaymayaApiError);
-					err.message.should.equal("Missing requestReferenceNumber");
-					done();
+			context("when total amount is missing", function() {
+				it("should return an error", function(done) {
+					checkout.buyer = buyer;
+					checkout.items = items;
+					checkout.requestReferenceNumber = requestReferenceNumber;
+					checkout.execute().catch(function(err) {
+						err.should.exist;
+						err.should.be.instanceOf(PaymayaApiError);
+						err.message.should.equal("Missing totalAmount");
+						done();
+					});
+				});
+			});
+
+			context("when request reference number is missing", function() {
+				it("should return an error", function(done) {
+					checkout.buyer = buyer;
+					checkout.items = items;
+					checkout.totalAmount = itemAmount;
+					checkout.execute().catch(function(err) {
+						err.should.exist;
+						err.should.be.instanceOf(PaymayaApiError);
+						err.message.should.equal("Missing requestReferenceNumber");
+						done();
+					});
 				});
 			});
 		});
