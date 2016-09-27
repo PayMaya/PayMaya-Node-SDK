@@ -74,21 +74,21 @@ var checkout = new Checkout();
 var YOUR_REQUEST_REFERENCE_NUMBER = "123456789";
 
 var address = {
-  	line1 : "9F Robinsons Cybergate 3",
-  	line2 : "Pioneer Street",
-  	city : "Mandaluyong City",
-  	state : "Metro Manila",
-  	zipCode : "12345",
-  	countryCode : "PH"
+  line1 : "9F Robinsons Cybergate 3",
+  line2 : "Pioneer Street",
+  city : "Mandaluyong City",
+  state : "Metro Manila",
+  zipCode : "12345",
+  countryCode : "PH"
 };
 
 var buyer = {
-	firstName : "John",
-	middleName : "Michaels",
-	lastName : "Doe",
+  firstName : "John",
+  middleName : "Michaels",
+  lastName : "Doe",
   contact: {
-   	phone : "+63(2)1234567890",
-   	email : "paymayabuyer1@gmail.com"
+    phone : "+63(2)1234567890",
+    email : "paymayabuyer1@gmail.com"
   },
   billingAddress: address,
   shippingAddress: address
@@ -101,15 +101,15 @@ var amountDetails = {
 };
 
 var amount = {
-	currency: "PHP",
-	value: "69.00",
+  currency: "PHP",
+  value: "69.00",
   details: amountDetails
 };
 
 var item = {
-	name: "Leather Belt",
-	code: "pm_belt",
-	description: "Medium-sv",
+  name: "Leather Belt",
+  code: "pm_belt",
+  description: "Medium-sv",
   quantity: "1",
   details: amountDetails,
   amount: amount,
