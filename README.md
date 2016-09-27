@@ -128,6 +128,7 @@ checkout.buyer = buyer;
 checkout.totalAmount = itemOptions.totalAmount;
 checkout.requestReferenceNumber = YOUR_REQUEST_REFERENCE_NUMBER;
 checkout.items = items;
+checkout.redirectUrl = redirectUrl;
 
 checkout.execute(callback);
 ```
