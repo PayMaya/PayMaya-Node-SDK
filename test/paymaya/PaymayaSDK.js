@@ -4,8 +4,8 @@ var paymayaSdk = require("./../../lib/paymaya/PaymayaSDK");
 
 describe('PaymayaSDK', function() {
 
-  var publicApiKey = "pk-iaioBC2pbY6d3BVRSebsJxghSHeJDW4n6navI7tYdrN";
-  var secretApiKey = "sk-uh4ZFfx9i0rZpKN6CxJ826nVgJ4saGGVAH9Hk7WrY6Q";
+  var publicApiKey = "pk-8rOz4MQKRxd5OLKBPcR6FIUx4Kay71kB3UrBFDaH172";
+  var secretApiKey = "sk-VrEDVetYZ6f4R1w4g0npwLzeBXtksd1smJ5lqk9Yh4y";
   var environment = paymayaSdk.ENVIRONMENT.SANDBOX;
 
   it('should initiate SDK in initCheckout', function(done) {

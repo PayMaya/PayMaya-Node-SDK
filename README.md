@@ -30,9 +30,9 @@ To use your PayMaya Node SDK, you need to have a different API key for Sandbox a
 Sandbox credentials are useful for testing application integration. All transactions and money flow made in this environment are only simulated and does not reflect your production records. The following sandbox API key can be used for testing purposes:
 
  ```
-Public-facing API Key: pk-iaioBC2pbY6d3BVRSebsJxghSHeJDW4n6navI7tYdrN
+Public-facing API Key: pk-8rOz4MQKRxd5OLKBPcR6FIUx4Kay71kB3UrBFDaH172
 
-Secret API Key: sk-uh4ZFfx9i0rZpKN6CxJ826nVgJ4saGGVAH9Hk7WrY6Q
+Secret API Key: sk-VrEDVetYZ6f4R1w4g0npwLzeBXtksd1smJ5lqk9Yh4y
 ```
  
 ##### _Production Environment_

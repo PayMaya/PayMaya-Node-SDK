@@ -56,7 +56,7 @@ describe('Checkout', function() {
 	var requestReferenceNumber = "123456789";
 
 	before(function(done) {
-		paymayaSdk.initCheckout("pk-iaioBC2pbY6d3BVRSebsJxghSHeJDW4n6navI7tYdrN", "sk-uh4ZFfx9i0rZpKN6CxJ826nVgJ4saGGVAH9Hk7WrY6Q", paymayaSdk.ENVIRONMENT.SANDBOX);
+		paymayaSdk.initCheckout("pk-8rOz4MQKRxd5OLKBPcR6FIUx4Kay71kB3UrBFDaH172", "sk-VrEDVetYZ6f4R1w4g0npwLzeBXtksd1smJ5lqk9Yh4y", paymayaSdk.ENVIRONMENT.SANDBOX);
 
 		var contact = new Contact();
 		contact.phone = contactOptions.phone;
