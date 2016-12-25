@@ -4,7 +4,7 @@
   "description": "Node.js Client for Paymaya API",
   "main": "index.js",
   "scripts": {
-    "test": "find test -name '*.js' | xargs mocha -R spec --timeout 10000"
+    "test": "mocha"
   },
   "keywords": [
     "paymaya",
@@ -13,8 +13,13 @@
   ],
   "author": "PayMaya Philippines, Inc.",
   "license": "ISC",
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/PayMaya/PayMaya-Node-SDK.git"
+	},
   "dependencies": {
-    "requestretry": "1.4.0"
+    "requestretry": "1.4.0",
+		"rekuire": "0.1.9"
   },
   "devDependencies": {
     "chai": "*",
