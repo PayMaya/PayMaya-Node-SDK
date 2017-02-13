@@ -1,23 +1,86 @@
 {
-  "name": "paymaya-node-sdk",
-  "version": "0.1.0",
-  "description": "Node.js Client for Paymaya API",
-  "main": "index.js",
-  "scripts": {
-    "test": "find test -name '*.js' | xargs mocha -R spec --timeout 10000"
+  "_args": [
+    [
+      {
+        "raw": "paymaya-node-sdk",
+        "scope": null,
+        "escapedName": "paymaya-node-sdk",
+        "name": "paymaya-node-sdk",
+        "rawSpec": "",
+        "spec": "latest",
+        "type": "tag"
+      },
+      "C:\\Users\\Ken\\Desktop\\Pay maya Node JS"
+    ]
+  ],
+  "_from": "paymaya-node-sdk@latest",
+  "_id": "paymaya-node-sdk@0.1.0",
+  "_inCache": true,
+  "_location": "/paymaya-node-sdk",
+  "_nodeVersion": "6.5.0",
+  "_npmOperationalInternal": {
+    "host": "packages-12-west.internal.npmjs.com",
+    "tmp": "tmp/paymaya-node-sdk-0.1.0.tgz_1475038330255_0.06159596145153046"
   },
+  "_npmUser": {
+    "name": "andyautida14",
+    "email": "andy.autida@voyagerinnovation.com"
+  },
+  "_npmVersion": "3.10.3",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "paymaya-node-sdk",
+    "scope": null,
+    "escapedName": "paymaya-node-sdk",
+    "name": "paymaya-node-sdk",
+    "rawSpec": "",
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/paymaya-node-sdk/-/paymaya-node-sdk-0.1.0.tgz",
+  "_shasum": "5aabe2a89ef1e800bc8b55ad17619ae254ee0b66",
+  "_shrinkwrap": null,
+  "_spec": "paymaya-node-sdk",
+  "_where": "C:\\Users\\Ken\\Desktop\\Pay maya Node JS",
+  "author": {
+    "name": "PayMaya Philippines, Inc."
+  },
+  "dependencies": {
+    "requestretry": "1.4.0"
+  },
+  "description": "Node.js Client for Paymaya API",
+  "devDependencies": {
+    "chai": "*",
+    "mocha": "*"
+  },
+  "directories": {},
+  "dist": {
+    "shasum": "5aabe2a89ef1e800bc8b55ad17619ae254ee0b66",
+    "tarball": "https://registry.npmjs.org/paymaya-node-sdk/-/paymaya-node-sdk-0.1.0.tgz"
+  },
+  "gitHead": "8d1dbc82bff6a3434d4a861162d4c6715b7cbb55",
   "keywords": [
     "paymaya",
     "api",
     "client"
   ],
-  "author": "PayMaya Philippines, Inc.",
   "license": "ISC",
-  "dependencies": {
-    "requestretry": "1.4.0"
+  "main": "index.js",
+  "maintainers": [
+    {
+      "name": "andyautida14",
+      "email": "andy.autida@voyagerinnovation.com"
+    }
+  ],
+  "name": "paymaya-node-sdk",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "scripts": {
+    "test": "find test -name '*.js' | xargs mocha -R spec --timeout 10000"
   },
-  "devDependencies": {
-    "chai": "*",
-    "mocha": "*"
-  }
+  "version": "0.1.0"
 }
