@@ -30,9 +30,9 @@ To use your PayMaya Node SDK, you need to have a different API key for Sandbox a
 Sandbox credentials are useful for testing application integration. All transactions and money flow made in this environment are only simulated and does not reflect your production records. The following sandbox API key can be used for testing purposes:
 
  ```
-Public-facing API Key: pk-iaioBC2pbY6d3BVRSebsJxghSHeJDW4n6navI7tYdrN
+Public-facing API Key: pk-TnpIh5X432Qw1DJLlMhzxRhBN4fvUp3SHPuHT3m5wv6
 
-Secret API Key: sk-uh4ZFfx9i0rZpKN6CxJ826nVgJ4saGGVAH9Hk7WrY6Q
+Secret API Key: sk-SNCvnXbvtAxU6mszPMoDl2M1d4e1ivko1E6PLGiOiqm
 ```
  
 ##### _Production Environment_
@@ -56,21 +56,35 @@ var callback = function(err, response) {
 
 ##### 1. Initiate SDK
 ```javascript
-var paymayaSdk = require("paymaya-node-sdk");
+var sdk = require("paymaya-node-sdk");
+var PaymayaSDK = sdk.PaymayaSDK;
 
-paymayaSdk.initCheckout(<CHECKOUT_PUBLIC_FACING_API_KEY>, <CHECKOUT_SECRET_API_KEY>, paymayaSdk.ENVIRONMENT.SANDBOX);
+PaymayaSDK.initCheckout(
+    <CHECKOUT_PUBLIC_FACING_API_KEY>,
+    <CHECKOUT_SECRET_API_KEY>,
+    paymayaSdk.ENVIRONMENT.SANDBOX
+);
 ```
 _If in Production, change environment to paymayaSdk.ENVIRONMENT.PRODUCTION_
 
 ##### 2. Create Checkout object
 ```javascript
+var Checkout = sdk.Checkout;
 var checkout = new Checkout();
 ```
 
 ##### 3. Execute Checkout API
-* Initiate Checkout - Checkout service entry point. It returns a checkoutId, and checkoutUrl. Use the checkoutUrl to redirect the buyer to the Checkout page.
+* Initiate Checkout - Checkout service entry point. It returns a `checkoutId`, and `redirectUrl`. Use the `redirectUrl` to redirect the buyer to the Checkout page.
 ```javascript
 var YOUR_REQUEST_REFERENCE_NUMBER = "123456789";
+
+var Checkout = sdk.Checkout;
+var Contact = sdk.Contact;
+var Address = sdk.Address;
+var Buyer = sdk.Buyer;
+var ItemAmountDetails = sdk.ItemAmountDetails;
+var ItemAmount = sdk.ItemAmount;
+var Item = sdk.Item;
 
 var addressOptions = {
   	line1 : "9F Robinsons Cybergate 3",
@@ -168,7 +182,14 @@ checkout.totalAmount = itemOptions.totalAmount;
 checkout.requestReferenceNumber = YOUR_REQUEST_REFERENCE_NUMBER;
 checkout.items = items;
 
-checkout.execute(callback);
+checkout.execute(function (error, response) {
+    if (error) {
+        // handle error
+    } else {
+        // track response.checkoutId
+        // redirect to response.redirectUrl
+    }
+});
 ```
 
 * Retrieve Checkout - Use this call to get information about a checkout identified by a checkoutId.
@@ -180,14 +201,15 @@ checkout.retrieve(callback);
 
 ##### 1. Initiate SDK
 ```javascript
-var paymayaSdk = require("paymaya-node-sdk");
+var PaymayaSDK = require("paymaya-node-sdk").PaymayaSDK;
 
-paymayaSdk.initCheckout(<CHECKOUT_PUBLIC_FACING_API_KEY>, <CHECKOUT_SECRET_API_KEY>, paymayaSdk.ENVIRONMENT.SANDBOX);
+PaymayaSDK.initCheckout(<CHECKOUT_PUBLIC_FACING_API_KEY>, <CHECKOUT_SECRET_API_KEY>, PaymayaSDK.ENVIRONMENT.SANDBOX);
 ```
 _If in Production, change environment to paymayaSdk.ENVIRONMENT.PRODUCTION_
 
 ##### 2. Create Customization object
 ```javascript
+var Customization = require("paymaya-node-sdk").Customization;
 var customization = new Customization();
 ```
 
@@ -216,14 +238,15 @@ customization.remove(callback);
 
 ##### 1. Initiate SDK
 ```javascript
-var paymayaSdk = require("paymaya-node-sdk");
+var PaymayaSDK = require("paymaya-node-sdk").PaymayaSDK;
 
-paymayaSdk.initCheckout(<CHECKOUT_PUBLIC_FACING_API_KEY>, <CHECKOUT_SECRET_API_KEY>, paymayaSdk.ENVIRONMENT.SANDBOX);
+PaymayaSDK.initCheckout(<CHECKOUT_PUBLIC_FACING_API_KEY>, <CHECKOUT_SECRET_API_KEY>, PaymayaSDK.ENVIRONMENT.SANDBOX);
 ```
 _If in Production, change environment to paymayaSdk.ENVIRONMENT.PRODUCTION_
 
 ##### 2. Create Webhook object
 ```javascript
+var Webhook = require("paymaya-node-sdk").Webhook;
 var webhook = new Webhook();
 ```
 
