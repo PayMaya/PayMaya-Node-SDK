@@ -65,7 +65,7 @@ PaymayaSDK.initCheckout(
     PaymayaSDK.ENVIRONMENT.SANDBOX
 );
 ```
-_If in Production, change environment to PaymayasDK.ENVIRONMENT.PRODUCTION_
+_If in Production, change environment to PaymayaSDK.ENVIRONMENT.PRODUCTION_
 
 ##### 2. Create Checkout object
 ```javascript
