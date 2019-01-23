@@ -62,10 +62,10 @@ var PaymayaSDK = sdk.PaymayaSDK;
 PaymayaSDK.initCheckout(
     <CHECKOUT_PUBLIC_FACING_API_KEY>,
     <CHECKOUT_SECRET_API_KEY>,
-    paymayaSdk.ENVIRONMENT.SANDBOX
+    PaymayaSDK.ENVIRONMENT.SANDBOX
 );
 ```
-_If in Production, change environment to paymayaSdk.ENVIRONMENT.PRODUCTION_
+_If in Production, change environment to PaymayasDK.ENVIRONMENT.PRODUCTION_
 
 ##### 2. Create Checkout object
 ```javascript
@@ -205,7 +205,7 @@ var PaymayaSDK = require("paymaya-node-sdk").PaymayaSDK;
 
 PaymayaSDK.initCheckout(<CHECKOUT_PUBLIC_FACING_API_KEY>, <CHECKOUT_SECRET_API_KEY>, PaymayaSDK.ENVIRONMENT.SANDBOX);
 ```
-_If in Production, change environment to paymayaSdk.ENVIRONMENT.PRODUCTION_
+_If in Production, change environment to PaymayaSDK.ENVIRONMENT.PRODUCTION_
 
 ##### 2. Create Customization object
 ```javascript
@@ -242,7 +242,7 @@ var PaymayaSDK = require("paymaya-node-sdk").PaymayaSDK;
 
 PaymayaSDK.initCheckout(<CHECKOUT_PUBLIC_FACING_API_KEY>, <CHECKOUT_SECRET_API_KEY>, PaymayaSDK.ENVIRONMENT.SANDBOX);
 ```
-_If in Production, change environment to paymayaSdk.ENVIRONMENT.PRODUCTION_
+_If in Production, change environment to PaymayaSDK.ENVIRONMENT.PRODUCTION_
 
 ##### 2. Create Webhook object
 ```javascript
