@@ -4,8 +4,8 @@ var should = chai.should();
 var paymayaSdk = require("./../../../lib/paymaya/PaymayaSDK");
 var Checkout = require("./../../../lib/paymaya/api/Checkout");
 var Buyer = require("./../../../lib/paymaya/model/checkout/Buyer");
-var Address = require("./../../../lib/paymaya/model/checkout/Address");
-var Contact = require("./../../../lib/paymaya/model/checkout/Contact");
+var Address = require("./../../../lib/paymaya/model/Address");
+var Contact = require("./../../../lib/paymaya/model/Contact");
 var Item = require("./../../../lib/paymaya/model/checkout/Item");
 var ItemAmount = require("./../../../lib/paymaya/model/checkout/ItemAmount");
 var ItemAmountDetails = require("./../../../lib/paymaya/model/checkout/ItemAmountDetails");
@@ -39,7 +39,7 @@ describe('Checkout', function() {
 	var itemAmountDetailsOptions = {
 		shippingFee: "14.00",
 		tax: "5.00",
-		subTotal: "50.00" 
+		subTotal: "50.00"
 	};
 
 	var itemAmountOptions = {
@@ -109,7 +109,7 @@ describe('Checkout', function() {
 		checkout.requestReferenceNumber = requestReferenceNumber;
 		done();
 	});
-	
+
 	it('should have buyer property', function(done) {
 		checkout.should.have.property('buyer');
 		done();
