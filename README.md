@@ -177,6 +177,7 @@ item.totalAmount = itemOptions.totalAmount;
 var items = [];
 items.push(item);
 
+var checkout = new Checkout();
 checkout.buyer = buyer;
 checkout.totalAmount = itemOptions.totalAmount;
 checkout.requestReferenceNumber = YOUR_REQUEST_REFERENCE_NUMBER;
