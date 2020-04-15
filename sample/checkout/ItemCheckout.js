@@ -8,7 +8,7 @@ var User = require("./User");
 (function() {
 	
 	// Initialize Paymaya SDK with Checkout API key, secret key and environment(SANDBOX or PRODUCTION)
-	paymayaSdk.initCheckout("pk-iaioBC2pbY6d3BVRSebsJxghSHeJDW4n6navI7tYdrN", "sk-uh4ZFfx9i0rZpKN6CxJ826nVgJ4saGGVAH9Hk7WrY6Q", paymayaSdk.ENVIRONMENT.SANDBOX);
+	paymayaSdk.initCheckout("pk-Z0OSzLvIcOI2UIvDhdTGVVfRSSeiGStnceqwUE7n0Ah", "sk-uh4ZFfx9i0rZpKN6CxJ826nVgJ4saGGVAH9Hk7WrY6Q", paymayaSdk.ENVIRONMENT.SANDBOX);
 
 	// Contruct item amount details
 	var itemAmountDetails = _getItemAmountDetails();
@@ -73,6 +73,7 @@ function _executeInitiateCheckout(checkout, buyer, items, itemAmount) {
 			console.log(JSON.stringify(response));
 		}
 
+  	checkout.getStatus(console.log);
 		_executeGetCheckout(checkout);
 	}
 	console.log("\nInitiating Checkout Api");
