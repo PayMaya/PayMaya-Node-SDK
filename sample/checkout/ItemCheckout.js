@@ -6,9 +6,9 @@ var ItemAmountDetails = require("./../../lib/paymaya/model/checkout/ItemAmountDe
 var User = require("./User");
 
 (function() {
-	
+
 	// Initialize Paymaya SDK with Checkout API key, secret key and environment(SANDBOX or PRODUCTION)
-	paymayaSdk.initCheckout("pk-Z0OSzLvIcOI2UIvDhdTGVVfRSSeiGStnceqwUE7n0Ah", "sk-uh4ZFfx9i0rZpKN6CxJ826nVgJ4saGGVAH9Hk7WrY6Q", paymayaSdk.ENVIRONMENT.SANDBOX);
+	paymayaSdk.initCheckout("pk-TnpIh5X432Qw1DJLlMhzxRhBN4fvUp3SHPuHT3m5wv6", "sk-SNCvnXbvtAxU6mszPMoDl2M1d4e1ivko1E6PLGiOiqm", paymayaSdk.ENVIRONMENT.SANDBOX);
 
 	// Contruct item amount details
 	var itemAmountDetails = _getItemAmountDetails();
