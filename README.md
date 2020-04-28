@@ -39,3 +39,13 @@ async function run() {
 
 run();
 ```
+
+## Contributing
+
+[**Guidelines**](https://github.com/PayMaya/PayMaya-Node-SDK/blob/master/CONTRIBUTING.md)
+
+[**Code of Conduct**](https://github.com/PayMaya/PayMaya-Node-SDK/blob/master/CODE_OF_CONDUCT.md)
+
+## License
+
+[ISC](https://github.com/PayMaya/PayMaya-Node-SDK/blob/master/LICENSE.md)
