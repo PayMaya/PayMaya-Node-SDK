@@ -3,6 +3,7 @@
 The PayMaya Node SDK allows your Node.JS app to accept payments from your customers using any MasterCard and Visa enabled card (credit, debit, or prepaid).
 
 [![npm](https://img.shields.io/npm/v/paymaya-node-sdk?color=8dc540&style=for-the-badge)](https://www.npmjs.com/package/paymaya-node-sdk)
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/PayMaya/PayMaya-Node-SDK/CI?color=8dc540&style=for-the-badge)](https://github.com/PayMaya/PayMaya-Node-SDK/actions?query=workflow%3ACI)
 [![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/PayMaya/PayMaya-Node-SDK?color=8dc540&style=for-the-badge)](https://codeclimate.com/github/PayMaya/PayMaya-Node-SDK)
 [![GitHub license](https://img.shields.io/github/license/PayMaya/PayMaya-Node-SDK?color=8dc540&style=for-the-badge)](https://github.com/PayMaya/PayMaya-Node-SDK/blob/master/LICENSE.md)
 
