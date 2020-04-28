@@ -1,0 +1,10 @@
+.babelrc
+.eslintignore
+.eslintrc.json
+.github
+.mocharc.json
+.nycrc
+bin
+coverage
+test
+tsconfig.json

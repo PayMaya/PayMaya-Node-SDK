@@ -1,24 +1,46 @@
 {
   "name": "paymaya-node-sdk",
-  "version": "0.1.1",
-  "description": "Node.js Client for Paymaya API",
-  "main": "index.js",
-  "scripts": {
-    "test": "find test -name '*.js' | xargs mocha -R spec --timeout 10000"
-  },
-  "keywords": [
-    "paymaya",
-    "api",
-    "client"
-  ],
+  "version": "1.0.0",
+  "description": "PayMaya SDK for Node.js",
   "author": "PayMaya Philippines, Inc.",
-  "license": "ISC",
+  "main": "lib/index.js",
+  "types": "index.d.ts",
+  "scripts": {
+    "lint": "eslint . --ext .js,.ts",
+    "test": "nyc mocha",
+    "test:watch": "nyc mocha --watch --watch-files src, test/**/*.spec.ts",
+    "build": "npm run build:lib && npm run build:types",
+    "build:lib": "tsc",
+    "build:types": "tsc --declaration --emitDeclarationOnly --declarationDir @types",
+    "prepublishOnly": "npm run lint && npm run test"
+  },
   "dependencies": {
-    "bluebird": "^3.4.6",
-    "requestretry": "1.4.0"
+    "axios": "^0.19.2"
   },
   "devDependencies": {
-    "chai": "*",
-    "mocha": "*"
+    "@types/axios-mock-adapter": "^1.10.0",
+    "@types/chai": "^4.2.11",
+    "@types/dirty-chai": "^2.0.2",
+    "@types/mocha": "^7.0.2",
+    "@types/node": "^13.13.2",
+    "@types/sinon": "^9.0.0",
+    "@types/sinon-chai": "^3.2.4",
+    "@typescript-eslint/eslint-plugin": "^2.26.0",
+    "@typescript-eslint/parser": "^2.26.0",
+    "axios-mock-adapter": "^1.18.1",
+    "chai": "^4.2.0",
+    "dirty-chai": "^2.0.1",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-plugin-import": "^2.20.2",
+    "mocha": "^7.1.1",
+    "nyc": "^15.0.1",
+    "sinon": "^9.0.2",
+    "sinon-chai": "^3.5.0",
+    "ts-node": "^8.8.1",
+    "typescript": "^3.8.3"
+  },
+  "engines": {
+    "node": "10"
   }
 }
