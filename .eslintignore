@@ -1,3 +1,4 @@
 @types/
 lib/
 node_modules
+index.d.ts
