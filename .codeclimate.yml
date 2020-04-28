@@ -1,20 +1,48 @@
-engines:
-  duplication:
+version: "2"
+checks:
+  argument-count:
     enabled: true
     config:
-      languages:
-      - javascript
-    checks:
-      Similar code:
-        enabled: false
+      threshold: 4
+  complex-logic:
+    enabled: true
+    config:
+      threshold: 4
+  file-lines:
+    enabled: true
+    config:
+      threshold: 250
+  method-complexity:
+    enabled: true
+    config:
+      threshold: 5
+  method-count:
+    enabled: true
+    config:
+      threshold: 20
+  method-lines:
+    enabled: true
+    config:
+      threshold: 25
+  nested-control-flow:
+    enabled: true
+    config:
+      threshold: 4
+  return-statements:
+    enabled: true
+    config:
+      threshold: 4
+  similar-code:
+    enabled: true
+  identical-code:
+    enabled: true
+plugins:
   eslint:
     enabled: true
-  csslint:
-    enabled: true
-ratings:
-  paths:
-  - lib/**
-exclude_paths:
-- node_modules/
-- sample/
-- test/
+exclude_patterns:
+- "**/*.d.ts"
+- "@types/"
+- "coverage/"
+- "lib/"
+- "node_modules/"
+- "test/"
