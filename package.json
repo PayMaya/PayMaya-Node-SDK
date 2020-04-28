@@ -42,5 +42,11 @@
   },
   "engines": {
     "node": "10"
-  }
+  },
+  "keywords": [
+    "paymaya",
+    "sdk",
+    "api",
+    "client"
+  ]
 }
