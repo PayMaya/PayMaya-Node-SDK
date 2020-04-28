@@ -121,7 +121,10 @@ class PaymentGatewayAPI implements PaymentGatewayAPIContract {
         response = await this.api.patch<T>(url, data, combinedConfig);
         break;
       case HttpMethod.DELETE:
-        response = await this.api.delete<T>(url, data, combinedConfig);
+        response = await this.api.delete<T>(url, {
+          ...combinedConfig,
+          data,
+        });
         break;
       default:
         throw new Error(`Unsupported HTTP method ${method}`);
