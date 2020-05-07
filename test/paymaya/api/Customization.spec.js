@@ -1,23 +1,25 @@
+var rek = require('rekuire');
 var chai = require('chai');
 var should = chai.should();
 
-var paymayaSdk = require("./../../../lib/paymaya/PaymayaSDK");
-var Customization = require("./../../../lib/paymaya/api/Customization");
+var paymayaSdk = rek('PaymayaSDK');
+var Customization = rek('Customization');
+var keys = rek('test-config').api.keys;
 
 describe('Customization', function() {
 
 	var customization;
 	
 	var customizationOptions = {
-		logoUrl: "https://cdn.paymaya.com/production/checkout_api/customization_example/yourlogo.svg",
-		iconUrl: "https://cdn.paymaya.com/production/checkout_api/customization_example/youricon.ico",
-		appleTouchIconUrl: "https://cdn.paymaya.com/production/checkout_api/customization_example/youricon_ios.ico",
-		customTitle: "Checkout Page Title",
-		colorScheme: "#368d5c"
+		logoUrl: 'https://cdn.paymaya.com/production/checkout_api/customization_example/yourlogo.svg',
+		iconUrl: 'https://cdn.paymaya.com/production/checkout_api/customization_example/youricon.ico',
+		appleTouchIconUrl: 'https://cdn.paymaya.com/production/checkout_api/customization_example/youricon_ios.ico',
+		customTitle: 'Checkout Page Title',
+		colorScheme: '#368d5c'
 	};
 
 	before(function(done) {
-		paymayaSdk.initCheckout("pk-iaioBC2pbY6d3BVRSebsJxghSHeJDW4n6navI7tYdrN", "sk-uh4ZFfx9i0rZpKN6CxJ826nVgJ4saGGVAH9Hk7WrY6Q", paymayaSdk.ENVIRONMENT.SANDBOX);
+		paymayaSdk.initCheckout(keys.public, keys.secret, paymayaSdk.ENVIRONMENT.SANDBOX);
 
 		customization = new Customization();
 		customization.logoUrl = customizationOptions.logoUrl;

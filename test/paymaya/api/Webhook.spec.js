@@ -1,21 +1,23 @@
+var rek = require('rekuire');
 var chai = require('chai');
 var should = chai.should();
 
-var paymayaSdk = require("./../../../lib/paymaya/PaymayaSDK");
-var Webhook = require("./../../../lib/paymaya/api/Webhook");
+var paymayaSdk = rek('PaymayaSDK');
+var Webhook = rek('Webhook');
+var keys = rek('test-config').api.keys;
 
 describe('Webhook', function() {
 
 	var webhook;
 	
 	var webhookOptions = {
-		name: "CHECKOUT_SUCCESS",
-		callbackUrl: "http://shop.someserver.com/success",
-		callbackUrlUpdate: "http://shop.someserver.com/success_update"
+		name: 'CHECKOUT_SUCCESS',
+		callbackUrl: 'http://shop.someserver.com/success',
+		callbackUrlUpdate: 'http://shop.someserver.com/success_update'
 	};
 
 	before(function(done) {
-		paymayaSdk.initCheckout("pk-iaioBC2pbY6d3BVRSebsJxghSHeJDW4n6navI7tYdrN", "sk-uh4ZFfx9i0rZpKN6CxJ826nVgJ4saGGVAH9Hk7WrY6Q", paymayaSdk.ENVIRONMENT.SANDBOX);
+		paymayaSdk.initCheckout(keys.public, keys.secret, paymayaSdk.ENVIRONMENT.SANDBOX);
 
 		webhook = new Webhook();
 		webhook.name = webhookOptions.name;
@@ -60,9 +62,9 @@ describe('Webhook', function() {
 	it('should execute retrieve webhook successfully', function(done) {
 		var callback = function(err, response) {
 			should.not.exist(err);
-  			should.exist(response);
-  			webhookId = response[0].id;
-  			done();
+			should.exist(response);
+			webhook.id = response[0].id;
+			done();
 		}
 		webhook.retrieve(callback);
 	});
@@ -72,8 +74,8 @@ describe('Webhook', function() {
 		webhook.callbackUrl = webhookOptions.callbackUrlUpdate;
 		var callback = function(err, response) {
 			should.not.exist(err);
-  			should.exist(response);
-  			done();
+			should.exist(response);
+			done();
 		}
 		webhook.update(callback);
 	});

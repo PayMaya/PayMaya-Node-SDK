@@ -1,14 +1,16 @@
+var rek = require('rekuire');
 var chai = require('chai');
 var should = chai.should();
 
-var paymayaSdk = require("./../../../lib/paymaya/PaymayaSDK");
-var Checkout = require("./../../../lib/paymaya/api/Checkout");
-var Buyer = require("./../../../lib/paymaya/model/checkout/Buyer");
-var Address = require("./../../../lib/paymaya/model/checkout/Address");
-var Contact = require("./../../../lib/paymaya/model/checkout/Contact");
-var Item = require("./../../../lib/paymaya/model/checkout/Item");
-var ItemAmount = require("./../../../lib/paymaya/model/checkout/ItemAmount");
-var ItemAmountDetails = require("./../../../lib/paymaya/model/checkout/ItemAmountDetails");
+var paymayaSdk = rek('PaymayaSDK');
+var Checkout = rek('Checkout');
+var Buyer = rek('Buyer');
+var Address = rek('Address');
+var Contact = rek('Contact');
+var Item = rek('Item');
+var ItemAmount = rek('ItemAmount');
+var ItemAmountDetails = rek('ItemAmountDetails');
+var keys = rek('test-config').api.keys;
 
 describe('Checkout', function() {
 
@@ -56,7 +58,7 @@ describe('Checkout', function() {
 	var requestReferenceNumber = "123456789";
 
 	before(function(done) {
-		paymayaSdk.initCheckout("pk-iaioBC2pbY6d3BVRSebsJxghSHeJDW4n6navI7tYdrN", "sk-uh4ZFfx9i0rZpKN6CxJ826nVgJ4saGGVAH9Hk7WrY6Q", paymayaSdk.ENVIRONMENT.SANDBOX);
+		paymayaSdk.initCheckout(keys.public, keys.secret, paymayaSdk.ENVIRONMENT.SANDBOX);
 
 		var contact = new Contact();
 		contact.phone = contactOptions.phone;
