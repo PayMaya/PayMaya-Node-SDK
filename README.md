@@ -48,4 +48,4 @@ run();
 
 ## License
 
-[ISC](https://github.com/PayMaya/PayMaya-Node-SDK/blob/master/LICENSE.md)
+[MIT](https://github.com/PayMaya/PayMaya-Node-SDK/blob/master/LICENSE)

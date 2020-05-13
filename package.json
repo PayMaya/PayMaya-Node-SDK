@@ -48,5 +48,6 @@
     "sdk",
     "api",
     "client"
-  ]
+  ],
+  "license": "MIT"
 }
