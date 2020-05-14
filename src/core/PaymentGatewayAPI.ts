@@ -107,27 +107,35 @@ class PaymentGatewayAPI implements PaymentGatewayAPIContract {
 
     let response: AxiosResponse<T>;
 
-    switch (method) {
-      case HttpMethod.GET:
-        response = await this.api.get<T>(url, combinedConfig);
-        break;
-      case HttpMethod.POST:
-        response = await this.api.post<T>(url, data, combinedConfig);
-        break;
-      case HttpMethod.PUT:
-        response = await this.api.put<T>(url, data, combinedConfig);
-        break;
-      case HttpMethod.PATCH:
-        response = await this.api.patch<T>(url, data, combinedConfig);
-        break;
-      case HttpMethod.DELETE:
-        response = await this.api.delete<T>(url, {
-          ...combinedConfig,
-          data,
-        });
-        break;
-      default:
-        throw new Error(`Unsupported HTTP method ${method}`);
+    try {
+      switch (method) {
+        case HttpMethod.GET:
+          response = await this.api.get<T>(url, combinedConfig);
+          break;
+        case HttpMethod.POST:
+          response = await this.api.post<T>(url, data, combinedConfig);
+          break;
+        case HttpMethod.PUT:
+          response = await this.api.put<T>(url, data, combinedConfig);
+          break;
+        case HttpMethod.PATCH:
+          response = await this.api.patch<T>(url, data, combinedConfig);
+          break;
+        case HttpMethod.DELETE:
+          response = await this.api.delete<T>(url, {
+            ...combinedConfig,
+            data,
+          });
+          break;
+        default:
+          throw new Error(`Unsupported HTTP method ${method}`);
+      }
+    } catch (err) {
+      if (!err.isAxiosError) {
+        throw err;
+      }
+
+      response = err.response;
     }
 
     return {
