@@ -30,6 +30,13 @@ class PaymentAPI implements PaymentAPIContract {
       `/checkout/v1/payments/${paymentId}/status`,
     );
   }
+
+  async captureAuthorizedPayment(paymentId: string): Promise<PGResponse<Payment>> {
+    return this.api.get<Payment>(
+      AuthKey.SECRET,
+      `/checkout/v1/payments/${paymentId}/capture`,
+    );
+  }
 }
 
 export default PaymentAPI;
