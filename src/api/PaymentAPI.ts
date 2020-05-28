@@ -26,7 +26,7 @@ class PaymentAPI implements PaymentAPIContract {
 
   async getStatus(paymentId: string): Promise<PGResponse<GetStatusResponse>> {
     return this.api.get<GetStatusResponse>(
-      AuthKey.PUBLIC,
+      AuthKey.SECRET,
       `/checkout/v1/payments/${paymentId}/status`,
     );
   }
