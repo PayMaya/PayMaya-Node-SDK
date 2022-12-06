@@ -14,7 +14,7 @@
   "author": "PayMaya Philippines, Inc.",
   "license": "ISC",
   "dependencies": {
-    "requestretry": "1.4.0"
+    "requestretry": "1.13.0"
   },
   "devDependencies": {
     "chai": "*",
